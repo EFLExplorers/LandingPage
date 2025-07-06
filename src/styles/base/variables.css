@@ -1,0 +1,48 @@
+:root {
+  /* Colors */
+  --color-primary-50: var(--colors-primary-50);
+  --color-primary-500: var(--colors-primary-500);
+  --color-primary-700: var(--colors-primary-700);
+
+  /* Spacing */
+  --space-xs: var(--spacing-xs);
+  --space-sm: var(--spacing-sm);
+  --space-md: var(--spacing-md);
+  --space-lg: var(--spacing-lg);
+  --space-xl: var(--spacing-xl);
+
+  /* Typography */
+  --font-size-sm: var(--typography-sizes-sm);
+  --font-size-base: var(--typography-sizes-base);
+  --font-size-lg: var(--typography-sizes-lg);
+  --font-weight-normal: var(--typography-weights-normal);
+  --font-weight-medium: var(--typography-weights-medium);
+  --font-weight-bold: var(--typography-weights-bold);
+
+  /* Layout */
+  --header-height: 4rem;
+  --container-width: 1280px;
+  --container-padding: var(--space-md);
+
+  /* Light theme colors */
+  --background: var(--color-gray-50);
+  --foreground: var(--color-gray-900);
+  --muted: var(--color-gray-500);
+  --border: var(--color-gray-200);
+
+  /* Component defaults */
+  --card-background: white;
+  --input-background: white;
+  --input-border: var(--border);
+}
+
+[data-theme="dark"] {
+  --background: var(--color-gray-900);
+  --foreground: var(--color-gray-50);
+  --muted: var(--color-gray-400);
+  --border: var(--color-gray-700);
+
+  --card-background: var(--color-gray-800);
+  --input-background: var(--color-gray-800);
+  --input-border: var(--color-gray-700);
+}

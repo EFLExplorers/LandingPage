@@ -1,0 +1,190 @@
+{
+  "version": 3,
+  "pages404": true,
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [],
+  "dynamicRoutes": [
+    {
+      "page": "/Auth/login/[platform]",
+      "regex": "^/Auth/login/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPplatform": "nxtPplatform"
+      },
+      "namedRegex": "^/Auth/login/(?<nxtPplatform>[^/]+?)(?:/)?$"
+    }
+  ],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/404",
+      "regex": "^/404(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/404(?:/)?$"
+    },
+    {
+      "page": "/Auth/login",
+      "regex": "^/Auth/login(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/Auth/login(?:/)?$"
+    },
+    {
+      "page": "/Auth/login/admin",
+      "regex": "^/Auth/login/admin(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/Auth/login/admin(?:/)?$"
+    },
+    {
+      "page": "/Auth/login/admin/page",
+      "regex": "^/Auth/login/admin/page(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/Auth/login/admin/page(?:/)?$"
+    },
+    {
+      "page": "/Auth/login/page",
+      "regex": "^/Auth/login/page(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/Auth/login/page(?:/)?$"
+    },
+    {
+      "page": "/Auth/login/student",
+      "regex": "^/Auth/login/student(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/Auth/login/student(?:/)?$"
+    },
+    {
+      "page": "/Auth/login/student/page",
+      "regex": "^/Auth/login/student/page(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/Auth/login/student/page(?:/)?$"
+    },
+    {
+      "page": "/Auth/login/teacher",
+      "regex": "^/Auth/login/teacher(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/Auth/login/teacher(?:/)?$"
+    },
+    {
+      "page": "/Auth/login/teacher/page",
+      "regex": "^/Auth/login/teacher/page(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/Auth/login/teacher/page(?:/)?$"
+    },
+    {
+      "page": "/Auth/register",
+      "regex": "^/Auth/register(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/Auth/register(?:/)?$"
+    },
+    {
+      "page": "/Auth/register/page",
+      "regex": "^/Auth/register/page(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/Auth/register/page(?:/)?$"
+    },
+    {
+      "page": "/Auth/register/student",
+      "regex": "^/Auth/register/student(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/Auth/register/student(?:/)?$"
+    },
+    {
+      "page": "/Auth/register/student/page",
+      "regex": "^/Auth/register/student/page(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/Auth/register/student/page(?:/)?$"
+    },
+    {
+      "page": "/Auth/register/teacher",
+      "regex": "^/Auth/register/teacher(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/Auth/register/teacher(?:/)?$"
+    },
+    {
+      "page": "/Auth/register/teacher/page",
+      "regex": "^/Auth/register/teacher/page(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/Auth/register/teacher/page(?:/)?$"
+    },
+    {
+      "page": "/Auth/register/teacher/pending",
+      "regex": "^/Auth/register/teacher/pending(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/Auth/register/teacher/pending(?:/)?$"
+    },
+    {
+      "page": "/Auth/register/teacher/pending/page",
+      "regex": "^/Auth/register/teacher/pending/page(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/Auth/register/teacher/pending/page(?:/)?$"
+    },
+    {
+      "page": "/about",
+      "regex": "^/about(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/about(?:/)?$"
+    },
+    {
+      "page": "/contact",
+      "regex": "^/contact(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/contact(?:/)?$"
+    },
+    {
+      "page": "/courses",
+      "regex": "^/courses(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/courses(?:/)?$"
+    },
+    {
+      "page": "/platforms/student",
+      "regex": "^/platforms/student(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/platforms/student(?:/)?$"
+    },
+    {
+      "page": "/platforms/teacher",
+      "regex": "^/platforms/teacher(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/platforms/teacher(?:/)?$"
+    },
+    {
+      "page": "/pricing",
+      "regex": "^/pricing(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/pricing(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "RSC",
+    "varyHeader": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch",
+    "prefetchHeader": "Next-Router-Prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSuffix": ".prefetch.rsc",
+    "prefetchSegmentHeader": "Next-Router-Segment-Prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments"
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  },
+  "rewrites": []
+}

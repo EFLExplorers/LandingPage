@@ -1,0 +1,245 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--theme-accent);
+  z-index: 1000;
+  padding: var(--spacing-lg) var(--spacing-xl);
+  border-bottom: 1px solid var(--theme-accent);
+  height: var(--header-height);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  text-decoration: none;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: var(--theme-accent);
+  border-radius: var(--radius-full);
+  font-weight: 500;
+  color: var(--text-inverse);
+}
+
+.nav {
+  display: flex;
+  gap: var(--spacing-lg);
+  align-items: center;
+}
+
+.navLink {
+  text-decoration: none;
+  color: var(--text-inverse);
+  opacity: 0.8;
+  font-size: var(--button-font-size);
+  transition: var(--transition-colors);
+}
+
+.navLink:hover {
+  opacity: 1;
+}
+
+.authButtons {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.registerButton,
+.loginButton {
+  padding: var(--button-padding-y) var(--button-padding-x);
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  font-size: var(--button-font-size);
+  transition: var(--button-transition);
+}
+
+.registerButton {
+  background-color: var(--theme-accent);
+  color: var(--text-inverse);
+  border: none;
+}
+
+.registerButton:hover {
+  background-color: var(--theme-accent-hover);
+}
+
+.loginButton {
+  background-color: transparent;
+  color: var(--text-inverse);
+  border: 1px solid var(--text-inverse);
+  opacity: 0.8;
+}
+
+.loginButton:hover {
+  opacity: 1;
+}
+
+.desktopAuthButtons {
+  display: none;
+}
+
+.signupButton {
+  padding: 0.5rem 1rem;
+  background-color: var(--theme-accent);
+  color: var(--text-inverse);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  text-decoration: none;
+}
+
+/* Mobile Components */
+.mobileMenuButton {
+  display: block;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--spacing-sm);
+  color: var(--text-inverse);
+}
+
+/* Group related styles */
+.mobileNav,
+.mobileAuthButtons {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Mobile Menu */
+.mobileMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: var(--theme-background);
+  border-bottom: 1px solid var(--theme-accent);
+  box-shadow: var(--shadow-lg);
+}
+
+.mobileNav {
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-md) var(--spacing-lg);
+}
+
+.mobileNavLink {
+  padding: var(--spacing-md) 0;
+  text-decoration: none;
+  color: var(--text-inverse);
+  opacity: 0.8;
+  font-size: 1rem;
+  border-bottom: 1px solid var(--theme-accent);
+  background: none;
+  border: none;
+  text-align: left;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: var(--transition-colors);
+}
+
+.mobileNavLink:hover {
+  opacity: 1;
+}
+
+.mobileDropdownIcon {
+  transition: var(--transition-transform);
+}
+
+.rotateIcon {
+  transform: rotate(180deg);
+}
+
+.mobileServicesDropdown {
+  border-bottom: 1px solid var(--theme-accent);
+}
+
+.mobileDropdownContent {
+  padding-left: var(--spacing-md);
+}
+
+.mobileDropdownItem {
+  display: block;
+  padding: var(--spacing-md) 0;
+  text-decoration: none;
+  color: var(--text-inverse);
+  opacity: 0.8;
+  font-size: 0.875rem;
+  transition: var(--transition-colors);
+}
+
+.mobileDropdownItem:hover {
+  opacity: 1;
+}
+
+.mobileNavLink:last-of-type {
+  border-bottom: none;
+  margin-bottom: var(--spacing-md);
+}
+
+.mobileAuthButtons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-sm);
+}
+
+.mobileLoginButton {
+  padding: var(--spacing-md) 0;
+  text-align: center;
+  background: none;
+  border: 1px solid var(--text-inverse);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  text-decoration: none;
+  color: var(--text-inverse);
+  opacity: 0.8;
+  transition: var(--transition-colors);
+}
+
+.mobileLoginButton:hover {
+  opacity: 1;
+}
+
+.mobileSignupButton {
+  padding: var(--spacing-md) 0;
+  text-align: center;
+  background-color: var(--theme-accent);
+  color: var(--text-inverse);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: var(--transition-colors);
+}
+
+.mobileSignupButton:hover {
+  background-color: var(--theme-accent-hover);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--spacing-md);
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .authButtons {
+    display: none;
+  }
+
+  .mobileMenuButton {
+    display: block;
+  }
+}

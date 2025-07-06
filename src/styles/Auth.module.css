@@ -1,0 +1,115 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: var(--spacing-2xl);
+  background-color: var(--theme-background);
+  background-image: radial-gradient(
+    circle at 50% 50%,
+    var(--theme-foreground) 0%,
+    var(--theme-background) 100%
+  );
+}
+
+.formContainer {
+  width: 100%;
+  max-width: 28rem;
+  padding: var(--spacing-2xl);
+  background: var(--theme-foreground);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.title {
+  margin-bottom: var(--spacing-2xl);
+  font-size: var(--font-3xl);
+  font-weight: var(--font-bold);
+  text-align: center;
+  color: var(--text-primary);
+  line-height: var(--leading-tight);
+}
+
+.subtitle {
+  margin-bottom: var(--spacing-xl);
+  font-size: var(--font-lg);
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.button {
+  width: 100%;
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--font-base);
+  font-weight: var(--font-medium);
+  color: var(--accent-foreground);
+  background-color: var(--accent);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: var(--transition-colors);
+}
+
+.button:hover {
+  background-color: var(--accent-hover);
+}
+
+.button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--theme-ring);
+}
+
+.button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.messageBox {
+  margin: var(--spacing-2xl) 0;
+  padding: var(--spacing-xl);
+  background: var(--theme-muted);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--radius-lg);
+  text-align: left;
+}
+
+.messageBox p {
+  margin-bottom: var(--spacing-lg);
+  color: var(--text-primary);
+  line-height: var(--leading-relaxed);
+  font-size: var(--font-sm);
+}
+
+.messageBox p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: var(--spacing-lg);
+  }
+
+  .formContainer {
+    padding: var(--spacing-xl);
+  }
+
+  .title {
+    font-size: var(--font-2xl);
+  }
+
+  .subtitle {
+    font-size: var(--font-base);
+  }
+
+  .button {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+}
