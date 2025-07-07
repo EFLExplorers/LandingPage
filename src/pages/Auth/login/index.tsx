@@ -5,8 +5,12 @@ import styles from "@/styles/Auth.module.css";
 export const LoginPage = () => {
   const router = useRouter();
 
-  const handlePlatformSelect = (platform: "student" | "teacher") => {
-    router.push(`/Auth/login/${platform}`);
+  const handlePlatformSelect = (platform: "student" | "teacher" | "admin") => {
+    if (platform === "admin") {
+      router.push(`/Auth/login/admin`);
+    } else {
+      router.push(`/Auth/login/${platform}`);
+    }
   };
 
   return (
@@ -18,15 +22,27 @@ export const LoginPage = () => {
         <div className={styles.buttonGroup}>
           <button
             onClick={() => handlePlatformSelect("student")}
-            className={styles.button}
+            className={`${styles.button} ${styles.studentButton}`}
           >
-            Student Login
+            📚 Student Login
           </button>
           <button
             onClick={() => handlePlatformSelect("teacher")}
-            className={styles.button}
+            className={`${styles.button} ${styles.teacherButton}`}
           >
-            Teacher Login
+            👨‍🏫 Teacher Login
+          </button>
+        </div>
+        
+        <div className={styles.adminSection}>
+          <div className={styles.separator}>
+            <span>Administrative Access</span>
+          </div>
+          <button
+            onClick={() => handlePlatformSelect("admin")}
+            className={`${styles.button} ${styles.adminButton}`}
+          >
+            Admin Login
           </button>
         </div>
 
@@ -41,4 +57,4 @@ export const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default LoginPage; 

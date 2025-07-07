@@ -1,5 +1,10 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import { PageLayout } from "../components/layout/PageLayout";
+import { ContactHeroSection } from "../components/layout/Contact/ContactHeroSection";
+import { ContactFormSection } from "../components/layout/Contact/ContactFormSection";
+import { ContactFAQSection } from "../components/layout/Contact/ContactFAQSection";
+
 import { ContactSection } from "../components/layout/Contact/ContactSection";
 
 export const ContactPage: NextPage = () => {
@@ -22,7 +27,13 @@ export const ContactPage: NextPage = () => {
         />
         <meta property="og:type" content="website" />
       </Head>
-      <ContactSection />
+      <PageLayout>
+        <ContactHeroSection />
+        <ContactFormSection />
+        <ContactFAQSection />
+    
+        <ContactSection />
+      </PageLayout>
     </>
   );
 };

@@ -30,15 +30,15 @@
 .heroContent p {
   font-size: var(--font-lg);
   line-height: var(--leading-relaxed);
-  color: var(--text-muted);
+  color: var(--text-primary);
   margin-bottom: var(--spacing-2xl);
   max-width: 500px;
 }
 
 .primaryButton {
   padding: var(--spacing-md) var(--spacing-3xl);
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
-  color: var(--accent-foreground);
+  background: linear-gradient(135deg, var(--theme-background) 0%, var(--theme-accent-hover) 100%);
+  color: var(--text-primary);
   border: none;
   border-radius: var(--radius-full);
   font-size: var(--font-base);

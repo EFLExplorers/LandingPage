@@ -22,7 +22,7 @@ export const Footer = () => {
             <h3>Company</h3>
             <Link href="/about">About Us</Link>
             <Link href="/pricing">Pricing</Link>
-            <Link href="/register">Register</Link>
+            <Link href="/Auth/register">Register</Link>
           </div>
 
           <div className={styles.column}>

@@ -157,3 +157,8 @@
 .transition-opacity {
   transition: var(--transition-opacity);
 }
+
+
+.text-shadow {
+  text-shadow: 1px 2px 4px rgba(5, 5, 5, 0.5);
+}

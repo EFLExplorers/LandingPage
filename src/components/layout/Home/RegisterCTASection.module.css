@@ -63,7 +63,7 @@
 .registerCtaButton {
   display: inline-block;
   padding: var(--spacing-md) var(--spacing-xl);
-  background-color: var(--primary-light);
+  background-color: var(--theme-accent);
   color: var(--text-primary);
   border: none;
   border-radius: var(--theme-radius);

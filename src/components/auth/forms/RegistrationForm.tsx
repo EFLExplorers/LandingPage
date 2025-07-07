@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { supabase } from "../../../utils/supabaseClient";
 import { FormInput } from "../shared/FormInput";
+import { PasswordInput } from "../shared/PasswordInput";
+import { LoadingSpinner } from "../shared/LoadingSpinner";
 import { UserPlatform, AuthFormData } from "../types/auth.types";
 import { validateRegistration } from "../utils/authValidation";
-import formStyles from "../styles/AuthForm.module.css";
-import componentStyles from "../styles/AuthForm.module.css";
+import sharedStyles from "../styles/shared.module.css";
 
 interface RegistrationFormProps {
   platform: UserPlatform;
@@ -43,7 +44,48 @@ export const RegistrationForm = ({ platform }: RegistrationFormProps) => {
     }
 
     try {
-      // Registration logic here...
+      // Create user account with Supabase Auth
+      const { data: authData, error: authError } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          data: {
+            first_name: formData.firstName,
+            last_name: formData.lastName,
+            role: platform,
+          },
+        },
+      });
+
+      if (authError) throw authError;
+
+      if (authData.user) {
+        // Create user profile in the users table
+        const { error: profileError } = await supabase
+          .from("users")
+          .insert([
+            {
+              id: authData.user.id,
+              email: formData.email,
+              first_name: formData.firstName,
+              last_name: formData.lastName,
+              role: platform,
+              approved: platform === "student" ? true : false, // Students are auto-approved, teachers need approval
+            },
+          ]);
+
+        if (profileError) throw profileError;
+
+        // Handle successful registration
+        if (platform === "teacher") {
+          // Redirect to pending approval page for teachers
+          window.location.href = "/Auth/register/teacher/pending";
+        } else {
+          // Auto-login for students and redirect to student platform
+          const platformUrl = process.env.NEXT_PUBLIC_STUDENT_URL;
+          window.location.href = `${platformUrl}/dashboard`;
+        }
+      }
     } catch (error) {
       setError(
         error instanceof Error ? error.message : "An unexpected error occurred"
@@ -54,8 +96,8 @@ export const RegistrationForm = ({ platform }: RegistrationFormProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={formStyles.authForm}>
-      {error && <div className={formStyles.error}>{error}</div>}
+    <form onSubmit={handleSubmit} className={sharedStyles.form}>
+      {error && <div className={sharedStyles.error}>{error}</div>}
 
       <FormInput
         id="firstName"
@@ -90,21 +132,20 @@ export const RegistrationForm = ({ platform }: RegistrationFormProps) => {
         disabled={loading}
       />
 
-      <FormInput
+      <PasswordInput
         id="password"
         name="password"
-        type="password"
         label="Password"
         value={formData.password}
         onChange={handleChange}
         required
         disabled={loading}
+        showStrength={true}
       />
 
-      <FormInput
+      <PasswordInput
         id="confirmPassword"
         name="confirmPassword"
-        type="password"
         label="Confirm Password"
         value={formData.confirmPassword || ""}
         onChange={handleChange}
@@ -114,14 +155,23 @@ export const RegistrationForm = ({ platform }: RegistrationFormProps) => {
 
       <button
         type="submit"
-        className={componentStyles.button}
+        className={sharedStyles.button}
         disabled={loading}
       >
-        {loading ? "Creating Account..." : "Create Account"}
+        {loading ? (
+          <>
+            <LoadingSpinner size="sm" color="white" />
+            <span>Creating Account...</span>
+          </>
+        ) : (
+          "Create Account"
+        )}
       </button>
 
-      <div className={componentStyles.links}>
-        <Link href="/auth/login">Already have an account? Login here</Link>
+      <div className={sharedStyles.links}>
+        <Link href="/Auth/login" className={sharedStyles.link}>
+          Already have an account? Login here
+        </Link>
       </div>
     </form>
   );

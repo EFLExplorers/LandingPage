@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { supabase } from "../../../utils/supabaseClient";
 import { FormInput } from "../shared/FormInput";
+import { PasswordInput } from "../shared/PasswordInput";
+import { LoadingSpinner } from "../shared/LoadingSpinner";
 import { UserPlatform, AuthFormData } from "../types/auth.types";
 import { validateLogin } from "../utils/authValidation";
-import styles from "../styles/LoginForm.module.css";
 import sharedStyles from "../styles/shared.module.css";
 
 interface LoginFormProps {
@@ -78,7 +79,7 @@ export const LoginForm = ({ platform }: LoginFormProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.form}>
+    <form onSubmit={handleSubmit} className={sharedStyles.form}>
       {error && <div className={sharedStyles.error}>{error}</div>}
 
       <FormInput
@@ -92,10 +93,9 @@ export const LoginForm = ({ platform }: LoginFormProps) => {
         disabled={loading}
       />
 
-      <FormInput
+      <PasswordInput
         id="password"
         name="password"
-        type="password"
         label="Password"
         value={formData.password}
         onChange={handleChange}
@@ -103,12 +103,25 @@ export const LoginForm = ({ platform }: LoginFormProps) => {
         disabled={loading}
       />
 
+      <div className={sharedStyles.forgotPassword}>
+        <Link href={`/Auth/forgot-password`} className={sharedStyles.link}>
+          Forgot your password?
+        </Link>
+      </div>
+
       <button type="submit" className={sharedStyles.button} disabled={loading}>
-        {loading ? "Logging in..." : "Login"}
+        {loading ? (
+          <>
+            <LoadingSpinner size="sm" color="white" />
+            <span>Logging in...</span>
+          </>
+        ) : (
+          "Login"
+        )}
       </button>
 
-      <div className={styles.links}>
-        <Link href={`/auth/register/${platform}`} className={sharedStyles.link}>
+      <div className={sharedStyles.links}>
+        <Link href={`/Auth/register/${platform}`} className={sharedStyles.link}>
           Don&apos;t have an account? Register here
         </Link>
       </div>

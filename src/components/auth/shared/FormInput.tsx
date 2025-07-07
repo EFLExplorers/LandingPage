@@ -1,5 +1,5 @@
 import { FormInputProps } from "../types/auth.types";
-import formStyles from "../styles/AuthForm.module.css";
+import sharedStyles from "../styles/shared.module.css";
 
 export const FormInput = ({
   id,
@@ -13,8 +13,8 @@ export const FormInput = ({
   error,
 }: FormInputProps) => {
   return (
-    <div className={formStyles.formGroup}>
-      <label htmlFor={id} className={formStyles.label}>
+    <div className={sharedStyles.formGroup}>
+      <label htmlFor={id} className={sharedStyles.label}>
         {label}
       </label>
       <input
@@ -23,11 +23,11 @@ export const FormInput = ({
         type={type}
         value={value}
         onChange={onChange}
-        className={`${formStyles.input} ${error ? formStyles.inputError : ""}`}
+        className={`${sharedStyles.input} ${error ? sharedStyles.error : ""}`}
         required={required}
         disabled={disabled}
       />
-      {error && <span className={formStyles.errorText}>{error}</span>}
+      {error && <span className={sharedStyles.error}>{error}</span>}
     </div>
   );
 };

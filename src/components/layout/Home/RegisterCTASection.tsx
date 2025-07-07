@@ -12,7 +12,7 @@ export const RegisterCTASection = () => {
           Join our community of learners and get access to all our premium
           features.
         </p>
-        <Link href="/register" className={styles.registerCtaButton}>
+        <Link href="/Auth/register" className={styles.registerCtaButton}>
           Create Your Account
         </Link>
       </div>

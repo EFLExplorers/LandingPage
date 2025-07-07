@@ -62,7 +62,7 @@ export const RegistrationForm = ({ platform }: RegistrationFormProps) => {
       // 3. Handle redirect based on platform
       if (platform === "teacher") {
         // Redirect to pending approval page for teachers
-        window.location.href = "/auth/register/teacher/pending";
+        window.location.href = "/Auth/register/teacher/pending";
       } else {
         // Direct login for students
         const { error: signInError } = await supabase.auth.signInWithPassword({
@@ -159,7 +159,7 @@ export const RegistrationForm = ({ platform }: RegistrationFormProps) => {
       </button>
 
       <div className={componentStyles.links}>
-        <Link href="/auth/login">Already have an account? Login here</Link>
+        <Link href="/Auth/login">Already have an account? Login here</Link>
       </div>
     </form>
   );

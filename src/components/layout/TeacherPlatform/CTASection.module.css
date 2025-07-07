@@ -1,14 +1,13 @@
 .cta {
   text-align: center;
-  padding: var(--spacing-5xl) var(--spacing-3xl);
-  background: linear-gradient(135deg, rgba(254, 200, 84, 0.85) 0%, rgba(255, 255, 255, 0.7) 100%);
+  background: linear-gradient(135deg, rgba(36, 0, 70, 0.85) 0%, rgba(255, 255, 255, 0.7) 100%);
   border-radius: var(--radius-2xl);
-  margin: var(--spacing-8xl) auto var(--spacing-4xl);
-  position: relative;
   z-index: 1;
   max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
+  padding: 1rem 0rem;
+  margin-top: var(--spacing-2xl);
+  margin-bottom: var(--spacing-2xl);
   animation: fadeInUp 0.8s ease-out 0.8s both;
   box-shadow: var(--shadow-xl);
   -webkit-backdrop-filter: blur(4px);
@@ -49,8 +48,8 @@
 
 .registerButton {
   padding: var(--spacing-md) var(--spacing-3xl);
-  background: var(--accent-foreground);
-  color: var(--accent);
+  background: var(--theme-accent);
+  color: var(--text-primary);
   border: none;
   border-radius: var(--radius-full);
   font-size: var(--font-base);
@@ -62,6 +61,8 @@
   z-index: 1;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  margin-top: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
 }
 
 .registerButton:hover {

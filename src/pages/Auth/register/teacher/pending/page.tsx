@@ -19,7 +19,7 @@ export const TeacherPendingPage = () => {
           <p>Please note that this process may take 1-2 business days.</p>
         </div>
         <div className={styles.buttonGroup}>
-          <Link href="/auth/login" className={styles.button}>
+          <Link href="/Auth/login" className={styles.button}>
             Return to Login
           </Link>
         </div>

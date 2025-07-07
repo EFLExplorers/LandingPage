@@ -16,7 +16,7 @@ export const TeacherHeroSection = () => {
       <div className={styles.heroImage}>
         <div className={styles.placeholder}>
           <Image
-            src="/assets/images/characters/Emma.png"
+            src="/assets/characters/Emma.png"
             alt="Teacher Character"
             width={400}
             height={300}
