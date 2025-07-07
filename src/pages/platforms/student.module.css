@@ -8,6 +8,7 @@
   background-attachment: fixed;
   position: relative;
   overflow: hidden;
+  padding-bottom: 4rem;
 }
 
 .main::before {
@@ -40,6 +41,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
   align-items: center;
+  min-height: 100vh;
   margin-bottom: 6rem;
   padding: 4rem 2rem;
   position: relative;
@@ -56,19 +58,18 @@
 .heroContent h1 {
   font-size: var(--font-6xl);
   font-weight: var(--font-bold);
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--text-primary);
   margin-bottom: var(--spacing-lg);
   line-height: 1.2;
+  text-shadow: 0 8px 16px rgba(0, 0, 0, 0.6), 0 4px 8px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .heroContent p {
   font-size: var(--font-lg);
   line-height: var(--leading-relaxed);
-  color: var(--text-muted);
+  color: var(--text-primary);
   margin-bottom: var(--spacing-2xl);
+  text-shadow: 0 6px 12px rgba(0, 0, 0, 0.5), 0 3px 6px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .primaryButton {
@@ -84,6 +85,7 @@
   box-shadow: var(--shadow-md);
   position: relative;
   overflow: hidden;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .primaryButton::before {
@@ -172,6 +174,7 @@
   line-height: var(--leading-relaxed);
   color: var(--text-primary);
   font-weight: var(--font-medium);
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .characterGrid {
@@ -234,11 +237,9 @@
 .planets h2 {
   font-size: var(--font-4xl);
   font-weight: var(--font-bold);
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--text-primary);
   margin-bottom: var(--spacing-4xl);
+  text-shadow: 0 6px 12px rgba(0, 0, 0, 0.5), 0 3px 6px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .planetCarousel {
@@ -369,12 +370,10 @@
 .planetName {
   font-size: var(--font-4xl);
   font-weight: var(--font-bold);
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--text-primary);
   margin-top: var(--spacing-2xl);
   transition: all 0.3s ease;
+  text-shadow: 0 6px 12px rgba(0, 0, 0, 0.5), 0 3px 6px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .spinButton {
@@ -407,10 +406,10 @@
 /* CTA Section */
 .cta {
   text-align: center;
-  padding: var(--spacing-5xl) var(--spacing-3xl);
-  background: linear-gradient(135deg, rgba(254, 200, 84, 0.85) 0%, rgba(255, 255, 255, 0.7) 100%);
+  padding: var(--spacing-3xl) var(--spacing-3xl);
+  background: linear-gradient(135deg, rgba(254, 200, 84, 0.4) 0%, rgba(255, 255, 255, 0.4) 100%);
   border-radius: var(--radius-2xl);
-  margin: var(--spacing-8xl) auto var(--spacing-4xl);
+  margin: var(--spacing-8xl) auto 4rem;
   position: relative;
   z-index: 1;
   max-width: 1200px;
@@ -420,13 +419,27 @@
   box-shadow: var(--shadow-xl);
   -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+}
+
+.ctaContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-lg);
+  width: 100%;
 }
 
 .cta h2 {
   font-size: var(--font-3xl);
   font-weight: var(--font-semibold);
   color: var(--text-primary);
-  margin-bottom: var(--spacing-2xl);
+  margin-bottom: 0;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .registerButton {
@@ -440,6 +453,9 @@
   cursor: pointer;
   transition: var(--transition-all);
   box-shadow: var(--shadow-md);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 220px;
+  width: 100%;
 }
 
 .registerButton:hover {

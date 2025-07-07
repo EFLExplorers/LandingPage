@@ -42,6 +42,7 @@
   line-height: var(--leading-relaxed);
   color: var(--text-primary);
   font-weight: var(--font-medium);
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .characterGrid {
@@ -107,6 +108,7 @@
   font-weight: var(--font-semibold);
   color: var(--text-primary);
   margin: 0 0 var(--spacing-xs) 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .toolInfo p {
@@ -129,6 +131,7 @@
   box-shadow: var(--shadow-lg);
   transition: var(--transition-all);
   border-left: 4px solid var(--accent);
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .featureText:hover {

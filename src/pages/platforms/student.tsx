@@ -179,8 +179,10 @@ export default function StudentPlatform() {
 
       {/* CTA Section */}
       <section className={styles.cta}>
-        <h2>Register today to start your learning journey!</h2>
-        <button className={styles.registerButton}>Register</button>
+        <div className={styles.ctaContent}>
+          <h2>Register today to start your learning journey!</h2>
+          <button className={styles.registerButton}>Register</button>
+        </div>
       </section>
     </main>
   );

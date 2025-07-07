@@ -12,15 +12,21 @@ export const ContactHeroSection = () => {
         <div className={styles.contactInfo}>
           <div className={styles.infoItem}>
             <span className={styles.icon}>📍</span>
-            <span>123 Learning Street, Education City, EC 12345</span>
+            <div className={styles.infoText}>
+              123 Learning Street, Education City, EC 12345
+            </div>
           </div>
           <div className={styles.infoItem}>
             <span className={styles.icon}>📧</span>
-            <a href="mailto:contact@eslexplorers.com">contact@eslexplorers.com</a>
+            <div className={styles.infoText}>
+              <a href="mailto:contact@eslexplorers.com">contact@eslexplorers.com</a>
+            </div>
           </div>
           <div className={styles.infoItem}>
             <span className={styles.icon}>📞</span>
-            <a href="tel:+1234567890">+1 (234) 567-890</a>
+            <div className={styles.infoText}>
+              <a href="tel:+1234567890">+1 (234) 567-890</a>
+            </div>
           </div>
         </div>
       </div>

@@ -2,12 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/Auth/login": "pages/Auth/login.js",
-  "/Auth/login/student": "pages/Auth/login/student.js",
-  "/Auth/login/teacher": "pages/Auth/login/teacher.js",
-  "/Auth/register/student": "pages/Auth/register/student.js",
-  "/Auth/register": "pages/Auth/register.js",
-  "/Auth/register/teacher": "pages/Auth/register/teacher.js",
-  "/Auth/login/admin": "pages/Auth/login/admin.js",
-  "/": "pages/index.js"
+  "/contact": "pages/contact.js",
+  "/about": "pages/about.js"
 }

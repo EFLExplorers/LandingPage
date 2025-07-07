@@ -29,6 +29,7 @@
   color: var(--text-primary);
   position: relative;
   z-index: 1;
+  text-shadow: 0 6px 12px rgba(0, 0, 0, 0.6), 0 3px 6px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 .subtitle {
@@ -50,18 +51,26 @@
 }
 
 .pricingCard {
-  background: var(--card-background-dark);
+  background: rgba(139, 92, 246, 0.08);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(139, 92, 246, 0.15);
   border-radius: var(--radius-2xl);
-  padding: var(--spacing-xl);
-  box-shadow: var(--shadow-lg);
+  padding: var(--spacing-2xl);
   transition: var(--transition-all);
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
+  gap: var(--spacing-lg);
+  height: 100%;
+  box-shadow: var(--shadow-lg);
 }
 
 .pricingCard:hover {
   transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+  background: rgba(139, 92, 246, 0.12);
 }
 
 .tierName {
@@ -69,6 +78,7 @@
   font-weight: 600;
   color: var(--text-primary);
   margin-bottom: 1rem;
+  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .priceContainer {
