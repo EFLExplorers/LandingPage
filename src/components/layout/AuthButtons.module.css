@@ -12,8 +12,8 @@
 
 .registerButton {
   padding: var(--spacing-sm) var(--spacing-lg);
-  background-color: var(--primary-light);
-  color: var(--text-primary);
+  background-color: var(--accent);
+  color: var(--text-inverse);
   text-decoration: none;
   font-weight: 600;
   border-radius: var(--theme-radius);
@@ -23,6 +23,7 @@
 .registerButton:hover {
   background-color: var(--primary-hover);
   transform: translateY(-1px);
+  color: var(--text-primary);
 }
 
 .loginButton {

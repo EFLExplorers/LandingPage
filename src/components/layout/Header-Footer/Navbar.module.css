@@ -82,7 +82,7 @@
 }
 
 .dropdownContent {
-  background: var(--theme-background);
+  background: rgba(139, 92, 246, 0.08);
   border-radius: 8px;
   padding: 0.5rem;
   margin-top: 0.5rem;
