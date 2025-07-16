@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { supabase } from "../../../utils/supabaseClient";
+import { supabase } from "../../../auth/supabaseClient";
 import { FormInput } from "../shared/FormInput";
 import { PasswordInput } from "../shared/PasswordInput";
 import { LoadingSpinner } from "../shared/LoadingSpinner";

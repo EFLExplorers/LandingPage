@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { supabase } from "../../utils/supabaseClient";
+import { supabase } from "../../auth/supabaseClient";
 import styles from "@/styles/Auth.module.css";
 
 export default function RegisterForm({

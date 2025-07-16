@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { supabase } from "../../utils/supabaseClient";
+import { supabase } from "../../auth/supabaseClient";
 import formStyles from "@/styles/auth/forms.module.css";
 import componentStyles from "@/styles/auth/components.module.css";
 import Link from "next/link";

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import { supabase } from "../../../utils/supabaseClient";
+import { supabase } from "../../../auth/supabaseClient";
 import { FormInput } from "../../../components/auth/shared/FormInput";
 import { AuthContainer } from "../../../components/auth/layout/AuthContainer";
 import sharedStyles from "../../../components/auth/styles/shared.module.css";

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { supabase } from "../../../utils/supabaseClient";
+import { supabase } from "../../../auth/supabaseClient";
 import { PasswordInput } from "../../../components/auth/shared/PasswordInput";
 import { AuthContainer } from "../../../components/auth/layout/AuthContainer";
 import sharedStyles from "../../../components/auth/styles/shared.module.css";

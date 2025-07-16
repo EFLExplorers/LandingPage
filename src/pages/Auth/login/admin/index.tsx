@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { supabase } from "../../../../utils/supabaseClient";
+import { supabase } from "../../../../auth/supabaseClient";
 import styles from "@/styles/Auth.module.css";
 
 export const AdminLoginPage = () => {
