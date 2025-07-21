@@ -8,11 +8,9 @@ import { UserPlatform, AuthFormData } from "../types/auth.types";
 import { validateLogin } from "../utils/authValidation";
 import sharedStyles from "../styles/shared.module.css";
 
-interface LoginFormProps {
-  platform: UserPlatform;
-}
+interface LoginFormProps {}
 
-export const LoginForm = ({ platform }: LoginFormProps) => {
+export const LoginForm = ({}: LoginFormProps) => {
   const [formData, setFormData] = useState<AuthFormData>({
     email: "",
     password: "",
@@ -41,7 +39,7 @@ export const LoginForm = ({ platform }: LoginFormProps) => {
 
       if (signInError) throw signInError;
 
-      // Verify user role and approval status
+      // Fetch user role and approval status
       const { data: userData, error: userError } = await supabase
         .from("users")
         .select("role, approved")
@@ -52,23 +50,20 @@ export const LoginForm = ({ platform }: LoginFormProps) => {
         throw new Error("Error retrieving user information");
       }
 
-      if (userData.role !== platform) {
-        throw new Error(
-          `This account is registered as a ${userData.role}, not a ${platform}`
-        );
+      // Redirect based on role
+      if (userData.role === "teacher") {
+        if (!userData.approved) {
+          window.location.href = "/Auth/register/teacher/pending";
+        } else {
+          window.location.href = "/platforms/teacher";
+        }
+      } else if (userData.role === "student") {
+        window.location.href = "/platforms/student";
+      } else if (userData.role === "admin") {
+        window.location.href = "/admin/dashboard";
+      } else {
+        window.location.href = "/";
       }
-
-      if (platform === "teacher" && !userData.approved) {
-        throw new Error("Your teacher account is pending approval");
-      }
-
-      // Redirect to appropriate platform
-      const platformUrl =
-        platform === "teacher"
-          ? process.env.NEXT_PUBLIC_TEACHER_URL
-          : process.env.NEXT_PUBLIC_STUDENT_URL;
-
-      window.location.href = `${platformUrl}/dashboard`;
     } catch (error) {
       setError(
         error instanceof Error ? error.message : "An unexpected error occurred"
@@ -121,7 +116,7 @@ export const LoginForm = ({ platform }: LoginFormProps) => {
       </button>
 
       <div className={sharedStyles.links}>
-        <Link href={`/Auth/register/${platform}`} className={sharedStyles.link}>
+        <Link href="/Auth/register" className={sharedStyles.link}>
           Don&apos;t have an account? Register here
         </Link>
       </div>

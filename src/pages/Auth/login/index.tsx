@@ -1,40 +1,22 @@
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-import { login } from "@/auth/login";
+import { LoginForm } from "@/components/auth/forms";
+import styles from "@/styles/Auth.module.css";
 
 const LoginPage = () => {
-  const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-
-  const handleLogin = async () => {
-    try {
-      await login(email, password);
-      router.push("/dashboard"); // Change to role-based redirect if needed
-    } catch (err: any) {
-      console.error("Login error", err);
-      setError(err.message);
-    }
-  };
-
   return (
-    <div>
-      <h1>Login</h1>
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={handleLogin}>Login</button>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+    <div className={styles.container}>
+      <div className={styles.formContainer}>
+        <div className={styles.header}>
+          <h1 className={styles.title}>Login</h1>
+          <p className={styles.subtitle}>Welcome back to ESL Explorers</p>
+        </div>
+        <LoginForm />
+        <div className={styles.registerLink}>
+          Don&apos;t have an account?{' '}
+          <a href="/Auth/register" className={styles.link}>
+            Register here
+          </a>
+        </div>
+      </div>
     </div>
   );
 };
