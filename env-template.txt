@@ -3,11 +3,17 @@
 NEXT_PUBLIC_SUPABASE_URL=https://EFLExplorers's-ddvpckdfcfqwtjxdgvhb.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRkdnBja2RmY2Zxd3RqeGRndmhiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE4MzQ2OTYsImV4cCI6MjA2NzQxMDY5Nn0.PPwtzGuizPNcROeoi5UOpwtRxGHV4vABIQ_7bvNuIFc
 
+# Service Role Key (for server-side operations - NEVER expose this to the client)
+# Get this from your Supabase dashboard: Settings > API > service_role key
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key_here
+
 # Example format:
 # NEXT_PUBLIC_SUPABASE_URL=https://EFLExplorers's-ddvpckdfcfqwtjxdgvhb.supabase.co
 # NEXT_PUBLIC_SUPABASE_ANON_KEY=
+# SUPABASE_SERVICE_ROLE_KEY=
 
 # Instructions:
 # 1. Copy this content to a new file named .env.local
 # 2. Replace the placeholder values with your actual Supabase credentials
-# 3. Save the file in the root directory of your project 
+# 3. Get your service role key from Supabase dashboard: Settings > API > service_role key
+# 4. Save the file in the root directory of your project 

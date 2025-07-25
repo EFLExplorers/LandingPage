@@ -19,6 +19,10 @@ export const Logo = () => {
           height={height}
           priority
           className={styles.logoImage}
+          style={{
+            width: 'auto',
+            height: 'auto',
+          }}
         />
       </div>
     </Link>

@@ -60,33 +60,36 @@ export const RegistrationForm = ({ platform }: RegistrationFormProps) => {
       if (authError) throw authError;
 
       if (authData.user) {
-        // Create user profile in the users table
-        const { error: profileError } = await supabase
-          .from("users")
-          .insert([
-            {
-              id: authData.user.id,
-              email: formData.email,
-              first_name: formData.firstName,
-              last_name: formData.lastName,
-              role: platform,
-              approved: platform === "student" ? true : false, // Students are auto-approved, teachers need approval
-            },
-          ]);
+        // Create user profile using server-side API (bypasses RLS issues)
+        const profileResponse = await fetch('/api/auth/create-profile', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            userId: authData.user.id,
+            email: formData.email,
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            role: platform,
+          }),
+        });
 
-        if (profileError) {
+        if (!profileResponse.ok) {
+          const profileError = await profileResponse.json();
           console.error("Profile creation error:", profileError);
           
           // Handle specific profile creation errors
-          if (profileError.code === '42501') {
+          if (profileError.error?.includes('security policy')) {
             throw new Error("Registration failed due to security policy. Please contact support.");
-          } else if (profileError.code === '23505') {
+          } else if (profileError.error?.includes('already exists')) {
             throw new Error("An account with this email already exists. Please try logging in instead.");
           } else {
-            throw new Error(`Failed to create user profile: ${profileError.message}`);
+            throw new Error(`Failed to create user profile: ${profileError.error || 'Unknown error'}`);
           }
         }
 
+        const profileData = await profileResponse.json();
         console.log("User profile created successfully for:", authData.user.id);
 
         // Handle successful registration

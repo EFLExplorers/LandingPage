@@ -15,20 +15,31 @@ DROP POLICY IF EXISTS "Users can view own profile" ON users;
 DROP POLICY IF EXISTS "Users can update own profile" ON users;
 DROP POLICY IF EXISTS "Admins can view all users" ON users;
 DROP POLICY IF EXISTS "Admins can update all users" ON users;
+DROP POLICY IF EXISTS "Allow authenticated users to insert their profile" ON users;
 
 -- Create the required policies for user registration and access
 
--- Policy 1: Allow users to insert their own profile during registration
-CREATE POLICY "Users can insert their own profile" ON users
-FOR INSERT WITH CHECK (auth.uid() = id);
+-- Policy 1: Allow authenticated users to insert their own profile during registration
+-- This is the key policy for registration to work
+CREATE POLICY "Allow authenticated users to insert their profile" ON users
+FOR INSERT WITH CHECK (
+  auth.uid() = id AND 
+  auth.uid() IS NOT NULL
+);
 
 -- Policy 2: Allow users to view their own profile
 CREATE POLICY "Users can view own profile" ON users
-FOR SELECT USING (auth.uid() = id);
+FOR SELECT USING (
+  auth.uid() = id AND 
+  auth.uid() IS NOT NULL
+);
 
 -- Policy 3: Allow users to update their own profile
 CREATE POLICY "Users can update own profile" ON users
-FOR UPDATE USING (auth.uid() = id);
+FOR UPDATE USING (
+  auth.uid() = id AND 
+  auth.uid() IS NOT NULL
+);
 
 -- Policy 4: Allow admins to view all users (optional)
 CREATE POLICY "Admins can view all users" ON users
@@ -57,4 +68,8 @@ WHERE tablename = 'users';
 SELECT schemaname, tablename, policyname, permissive, roles, cmd, qual, with_check
 FROM pg_policies 
 WHERE tablename = 'users'
-ORDER BY policyname; 
+ORDER BY policyname;
+
+-- Test the policies (optional - run this to verify)
+-- This should return the current user's profile if they're authenticated
+SELECT * FROM users WHERE id = auth.uid(); 

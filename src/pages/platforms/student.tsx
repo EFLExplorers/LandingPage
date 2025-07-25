@@ -4,20 +4,20 @@ import styles from "./student.module.css";
 
 const characters = [
   {
-    name: "Professor",
-    imageUrl: "/images/characters/professor.png",
+    name: "Riley",
+    imageUrl: "/assets/images/characters/Riley.png",
   },
   {
-    name: "Luna",
-    imageUrl: "/images/characters/luna.png",
+    name: "Luke",
+    imageUrl: "/assets/images/characters/Luke.png",
   },
   {
-    name: "Max",
-    imageUrl: "/images/characters/max.png",
+    name: "Cassidy",
+    imageUrl: "/assets/images/characters/Cassidy.png",
   },
   {
-    name: "Sarah",
-    imageUrl: "/images/characters/sarah.png",
+    name: "Emma",
+    imageUrl: "/assets/images/characters/Emma.png",
   },
 ];
 
@@ -111,6 +111,10 @@ export default function StudentPlatform() {
                       width: "100%",
                       height: "100%",
                       objectFit: "cover",
+                    }}
+                    onError={(e) => {
+                      console.error(`Failed to load image: ${character.imageUrl}`);
+                      // You could set a fallback image here
                     }}
                   />
                 </div>
