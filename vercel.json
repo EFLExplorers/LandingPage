@@ -6,7 +6,7 @@
   "env": {
     "NEXT_PUBLIC_SUPABASE_URL": "https://ldxprwemugqomkaroaqp.supabase.co",
     "NEXT_PUBLIC_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxkeHByd2VtdWdxb21rYXJvYXFwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMzODM4OTYsImV4cCI6MjA2ODk1OTg5Nn0.zVqa4rbr88rkh6yRwvaONa3kSYZx2yew-PXDINLZhEw",
-    "NEXT_PUBLIC_STUDENT_URL": "https://student.esl-explorers.com",
-    "NEXT_PUBLIC_TEACHER_URL": "https://teacher.esl-explorers.com"
+    "NEXT_PUBLIC_STUDENT_URL": "https://landingpage-alpha-self.vercel.app/",
+    "NEXT_PUBLIC_TEACHER_URL": "https://landingpage-alpha-self.vercel.app/"
   }
 }

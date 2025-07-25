@@ -2,35 +2,10 @@ import { supabase } from "../auth/supabaseClient";
 
 /**
  * Debug authentication issues and provide detailed error information
+ * Note: Removed admin API calls to prevent 403 errors
  */
 export const debugAuth = async (email: string, password: string) => {
   console.log("🔐 Debugging Authentication...");
-  
-  // Check if user exists in auth
-  console.log("📧 Checking if user exists...");
-  try {
-    const { data: { users }, error } = await supabase.auth.admin.listUsers();
-    
-    if (error) {
-      console.error("❌ Error checking users:", error);
-    } else {
-      const userExists = users?.some(user => user.email === email);
-      console.log(`👤 User exists in auth: ${userExists ? 'Yes' : 'No'}`);
-      
-      if (userExists) {
-        const user = users?.find(u => u.email === email);
-        console.log("📋 User details:", {
-          id: user?.id,
-          email: user?.email,
-          email_confirmed_at: user?.email_confirmed_at,
-          created_at: user?.created_at,
-          last_sign_in_at: user?.last_sign_in_at
-        });
-      }
-    }
-  } catch (error) {
-    console.log("⚠️ Cannot check users (admin access required)");
-  }
   
   // Test sign in with detailed error handling
   console.log("🔑 Testing sign in...");
@@ -76,24 +51,14 @@ export const debugAuth = async (email: string, password: string) => {
 
 /**
  * Check if a user exists and their status
+ * Note: Removed admin API calls - this function now only provides guidance
  */
 export const checkUserStatus = async (email: string) => {
   console.log("🔍 Checking user status for:", email);
+  console.log("💡 Note: Cannot check user status from client-side (requires admin access)");
+  console.log("💡 To check user status, use server-side functions with service role key");
   
-  try {
-    // Try to get user by email (this might not work without admin access)
-    const { data, error } = await supabase.auth.admin.getUserById(email);
-    
-    if (error) {
-      console.log("⚠️ Cannot check user status (admin access required)");
-      return null;
-    }
-    
-    return data.user;
-  } catch (error) {
-    console.log("⚠️ Cannot check user status");
-    return null;
-  }
+  return null;
 };
 
 /**

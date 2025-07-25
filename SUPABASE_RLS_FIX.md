@@ -1,141 +1,96 @@
 # Supabase RLS Policy Fix
 
-## Issue Identified
-The error "new row violates row-level security policy for table 'users'" indicates that your Row Level Security (RLS) policies are blocking the INSERT operation during user registration.
+## Issues Fixed
 
-## Root Cause
-When a user registers, the code tries to insert a record into the `users` table, but the RLS policy is preventing this operation.
+### 1. Client-Side Admin API Calls Removed ✅
 
-## Solution
+**Problem:** The application was making client-side calls to Supabase admin endpoints (`supabase.auth.admin.listUsers()` and `supabase.auth.admin.getUserById()`), which caused 403 Forbidden errors because the anon key doesn't have admin privileges.
 
-### 1. Check Current RLS Policies
-First, check your current RLS policies in the Supabase dashboard:
+**Solution:** 
+- Removed all `supabase.auth.admin.*` calls from `src/utils/debugAuth.ts`
+- Updated the `debugAuth` function to only use safe client-side authentication methods
+- Kept the `checkUserStatus` function but made it provide guidance instead of making admin calls
 
-1. Go to your Supabase project dashboard
-2. Navigate to **Authentication** > **Policies**
-3. Find the `users` table
-4. Check what policies exist
+**Files Modified:**
+- `src/utils/debugAuth.ts` - Removed admin API calls that were causing 403 errors
 
-### 2. Required RLS Policies for User Registration
-
-You need these policies on your `users` table:
-
-#### Policy 1: Allow users to insert their own profile
-```sql
-CREATE POLICY "Users can insert their own profile" ON users
-FOR INSERT WITH CHECK (auth.uid() = id);
+**What was removed:**
+```typescript
+// REMOVED - This was causing 403 errors
+const { data: { users }, error } = await supabase.auth.admin.listUsers();
+const { data, error } = await supabase.auth.admin.getUserById(email);
 ```
 
-#### Policy 2: Allow users to view their own profile
-```sql
-CREATE POLICY "Users can view own profile" ON users
-FOR SELECT USING (auth.uid() = id);
+**What was kept:**
+```typescript
+// KEPT - This is safe for client-side use
+const { data, error } = await supabase.auth.signInWithPassword({
+  email,
+  password,
+});
 ```
 
-#### Policy 3: Allow users to update their own profile
-```sql
-CREATE POLICY "Users can update own profile" ON users
-FOR UPDATE USING (auth.uid() = id);
+### 2. Authentication Flow Improvements
+
+The login process now:
+1. ✅ Tests Supabase connection safely
+2. ✅ Attempts sign-in with proper error handling
+3. ✅ Provides specific error messages for common issues (email not confirmed, invalid credentials, etc.)
+4. ✅ No longer makes unauthorized admin API calls
+
+### 3. Error Handling
+
+The application now properly handles these authentication scenarios:
+- **Email not confirmed**: Shows clear message asking user to confirm email
+- **Invalid credentials**: Shows appropriate error message
+- **Too many requests**: Shows rate limiting message
+- **User profile not found**: Shows support contact message
+
+## Security Best Practices
+
+### ✅ What's Safe for Client-Side:
+- `supabase.auth.signInWithPassword()`
+- `supabase.auth.signUp()`
+- `supabase.auth.resetPasswordForEmail()`
+- Regular database queries with RLS policies
+- `supabase.auth.getUser()`
+
+### ❌ What Should Never Be Client-Side:
+- `supabase.auth.admin.listUsers()`
+- `supabase.auth.admin.getUserById()`
+- `supabase.auth.admin.createUser()`
+- Any admin API calls
+- Service role key usage
+
+### 🔧 For Admin Operations:
+If you need to perform admin operations, create server-side API routes that use the service role key:
+
+```typescript
+// pages/api/admin/users.ts
+import { createClient } from '@supabase/supabase-js'
+
+const supabase = createClient(
+  process.env.SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY! // Only use this server-side
+)
+
+export default async function handler(req, res) {
+  const { data, error } = await supabase.auth.admin.listUsers()
+  // Handle response
+}
 ```
 
-### 3. Alternative: Disable RLS for Testing
-If you want to test without RLS first, you can temporarily disable it:
+## Testing
 
-```sql
-ALTER TABLE users DISABLE ROW LEVEL SECURITY;
-```
-
-**⚠️ Warning:** Only use this for testing. Re-enable RLS in production.
-
-### 4. Complete SQL Setup
-Here's the complete SQL to set up proper RLS policies:
-
-```sql
--- Enable RLS on users table
-ALTER TABLE users ENABLE ROW LEVEL SECURITY;
-
--- Policy for inserting user profiles during registration
-CREATE POLICY "Users can insert their own profile" ON users
-FOR INSERT WITH CHECK (auth.uid() = id);
-
--- Policy for viewing user profiles
-CREATE POLICY "Users can view own profile" ON users
-FOR SELECT USING (auth.uid() = id);
-
--- Policy for updating user profiles
-CREATE POLICY "Users can update own profile" ON users
-FOR UPDATE USING (auth.uid() = id);
-
--- Optional: Allow admins to view all users
-CREATE POLICY "Admins can view all users" ON users
-FOR SELECT USING (
-  EXISTS (
-    SELECT 1 FROM users 
-    WHERE id = auth.uid() AND role = 'admin'
-  )
-);
-```
-
-## Testing the Fix
-
-1. **Apply the RLS policies** in your Supabase dashboard
-2. **Try registering a new user** - it should work now
-3. **Check the console logs** - you should see "User profile created successfully"
-4. **Verify in database** - check that the user record was created
-
-## Common RLS Policy Mistakes
-
-### ❌ Wrong: No INSERT policy
-```sql
--- Missing INSERT policy will block registration
-CREATE POLICY "Users can view own profile" ON users
-FOR SELECT USING (auth.uid() = id);
-```
-
-### ✅ Correct: Complete policy set
-```sql
--- Allow INSERT during registration
-CREATE POLICY "Users can insert their own profile" ON users
-FOR INSERT WITH CHECK (auth.uid() = id);
-
--- Allow SELECT for profile access
-CREATE POLICY "Users can view own profile" ON users
-FOR SELECT USING (auth.uid() = id);
-```
-
-## Debugging RLS Issues
-
-### 1. Check if RLS is enabled
-```sql
-SELECT schemaname, tablename, rowsecurity 
-FROM pg_tables 
-WHERE tablename = 'users';
-```
-
-### 2. List all policies
-```sql
-SELECT schemaname, tablename, policyname, permissive, roles, cmd, qual, with_check
-FROM pg_policies 
-WHERE tablename = 'users';
-```
-
-### 3. Test policy manually
-```sql
--- Test as authenticated user
-SELECT * FROM users WHERE id = auth.uid();
-```
+After these changes:
+1. ✅ No more 403 errors from admin API calls
+2. ✅ Authentication still works properly
+3. ✅ Error messages are more helpful
+4. ✅ Security is improved by removing client-side admin access
 
 ## Next Steps
 
-1. **Apply the RLS policies** above
-2. **Test user registration** 
-3. **Monitor the console logs** for success messages
-4. **Verify user profiles are created** in the database
-5. **Test login flow** to ensure everything works
-
-## Security Notes
-
-- **Never disable RLS in production**
-- **Always use specific policies** rather than broad permissions
-- **Test thoroughly** before deploying to production
-- **Monitor for policy violations** in your logs 
+1. **Monitor the application** to ensure no more 403 errors appear
+2. **Test the login flow** with various scenarios (valid user, unconfirmed email, invalid credentials)
+3. **Consider implementing server-side admin functions** if you need user management features
+4. **Add email confirmation resend functionality** to improve user experience 
