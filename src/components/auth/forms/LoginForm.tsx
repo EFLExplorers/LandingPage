@@ -11,9 +11,11 @@ import { debugUserProfile } from "../../../utils/debugUserProfile";
 import { debugSupabaseConnection } from "../../../utils/debugSupabaseConnection";
 import { debugAuth } from "../../../utils/debugAuth";
 
-interface LoginFormProps {}
+interface LoginFormProps {
+  platform?: UserPlatform;
+}
 
-export const LoginForm = ({}: LoginFormProps) => {
+export const LoginForm = ({ platform }: LoginFormProps) => {
   const [formData, setFormData] = useState<AuthFormData>({
     email: "",
     password: "",
@@ -93,6 +95,13 @@ export const LoginForm = ({}: LoginFormProps) => {
 
       if (!userData) {
         setError("User profile not found. Please contact support.");
+        setLoading(false);
+        return;
+      }
+
+      // Validate platform if specified
+      if (platform && userData.role !== platform) {
+        setError(`This account is registered as a ${userData.role}, not a ${platform}`);
         setLoading(false);
         return;
       }
