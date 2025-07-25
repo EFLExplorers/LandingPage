@@ -199,6 +199,13 @@
     padding: var(--spacing-sm) var(--spacing-xl);
     font-size: var(--font-sm);
     min-height: 2.75rem;
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .buttonGroup {
+    width: 100%;
+    max-width: 280px;
   }
 }
 

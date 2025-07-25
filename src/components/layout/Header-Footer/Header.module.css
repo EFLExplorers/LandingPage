@@ -98,7 +98,7 @@
 
 /* Mobile Components */
 .mobileMenuButton {
-  display: block;
+  display: none;
   background: none;
   border: none;
   cursor: pointer;
@@ -113,8 +113,9 @@
   flex-direction: column;
 }
 
-/* Mobile Menu */
+/* Mobile Menu - Desktop styles (hidden by default) */
 .mobileMenu {
+  display: none;
   position: absolute;
   top: 100%;
   left: 0;
@@ -125,12 +126,13 @@
 }
 
 .mobileNav {
-  display: flex;
+  display: none;
   flex-direction: column;
   padding: var(--spacing-md) var(--spacing-lg);
 }
 
 .mobileNavLink {
+  display: none;
   padding: var(--spacing-md) 0;
   text-decoration: none;
   color: var(--text-inverse);
@@ -141,7 +143,6 @@
   border: none;
   text-align: left;
   width: 100%;
-  display: flex;
   align-items: center;
   justify-content: space-between;
   transition: var(--transition-colors);
@@ -187,13 +188,14 @@
 }
 
 .mobileAuthButtons {
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: var(--spacing-sm);
   margin-top: var(--spacing-sm);
 }
 
 .mobileLoginButton {
+  display: none;
   padding: var(--spacing-md) 0;
   text-align: center;
   background: none;
@@ -211,6 +213,7 @@
 }
 
 .mobileSignupButton {
+  display: none;
   padding: var(--spacing-md) 0;
   text-align: center;
   background-color: var(--theme-accent);
@@ -247,6 +250,85 @@
 
   .mobileMenuButton {
     display: block;
+  }
+
+  .mobileMenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--theme-background);
+    border-bottom: 1px solid var(--theme-accent);
+    box-shadow: var(--shadow-lg);
+    z-index: 999;
+  }
+
+  .mobileNav {
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+
+  .mobileNavLink {
+    padding: var(--spacing-md) 0;
+    text-decoration: none;
+    color: var(--text-primary);
+    opacity: 0.8;
+    font-size: 1rem;
+    border-bottom: 1px solid var(--theme-accent);
+    background: none;
+    border: none;
+    text-align: left;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: var(--transition-colors);
+  }
+
+  .mobileNavLink:hover {
+    opacity: 1;
+  }
+
+  .mobileAuthButtons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-sm);
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+
+  .mobileLoginButton {
+    padding: var(--spacing-md) 0;
+    text-align: center;
+    background: none;
+    border: 1px solid var(--text-primary);
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    text-decoration: none;
+    color: var(--text-primary);
+    opacity: 0.8;
+    transition: var(--transition-colors);
+  }
+
+  .mobileLoginButton:hover {
+    opacity: 1;
+  }
+
+  .mobileSignupButton {
+    padding: var(--spacing-md) 0;
+    text-align: center;
+    background-color: var(--theme-accent);
+    color: var(--text-inverse);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: var(--transition-colors);
+  }
+
+  .mobileSignupButton:hover {
+    background-color: var(--theme-accent-hover);
   }
 }
 
