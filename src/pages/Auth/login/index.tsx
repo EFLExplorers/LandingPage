@@ -10,7 +10,7 @@ const LoginPage = () => {
           <p className={styles.subtitle}>Welcome back to ESL Explorers</p>
         </div>
         <LoginForm />
-     
+    
       </div>
     </div>
   );
