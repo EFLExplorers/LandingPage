@@ -1,5 +1,5 @@
 import { AuthContainer } from "@/components/auth/layout";
-import { LoginForm } from "@/components/auth/forms";
+import { LoginForm } from "@/components/auth/LoginForm";
 
 export const StudentLoginPage = () => {
   return (

@@ -74,7 +74,12 @@ export const RegistrationForm = ({ platform }: RegistrationFormProps) => {
             },
           ]);
 
-        if (profileError) throw profileError;
+        if (profileError) {
+          console.error("Profile creation error:", profileError);
+          throw new Error(`Failed to create user profile: ${profileError.message}`);
+        }
+
+        console.log("User profile created successfully for:", authData.user.id);
 
         // Handle successful registration
         if (platform === "teacher") {

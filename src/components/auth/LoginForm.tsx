@@ -4,6 +4,7 @@ import styles from "./styles/AuthForm.module.css";
 import Link from "next/link";
 import { Button } from "../ui/Button/Button";
 import { useRouter } from "next/router";
+import { debugUserProfile } from "../../utils/debugUserProfile";
 
 interface LoginFormProps {
   platform: "student" | "teacher";
@@ -37,14 +38,27 @@ export const LoginForm = ({ platform }: LoginFormProps) => {
       if (signInError) throw signInError;
 
       // 2. Check user role and approval status
+      console.log("🔍 Fetching user profile for ID:", data.user?.id);
       const { data: userData, error: userError } = await supabase
         .from("users")
         .select("role, approved")
         .eq("id", data.user?.id)
         .single();
 
-      if (userError || !userData) {
+      // More specific error handling
+      if (userError) {
+        console.error("User data fetch error:", userError);
+        if (userError.code === 'PGRST116') {
+          // No rows returned - user doesn't exist in users table
+          console.warn("⚠️ User profile not found - running debug check...");
+          await debugUserProfile(data.user?.id || "");
+          throw new Error("User profile not found. Please contact support.");
+        }
         throw new Error("Error retrieving user information");
+      }
+
+      if (!userData) {
+        throw new Error("User profile not found. Please contact support.");
       }
 
       if (userData.role !== platform) {

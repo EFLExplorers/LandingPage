@@ -7,6 +7,7 @@ import { LoadingSpinner } from "../shared/LoadingSpinner";
 import { UserPlatform, AuthFormData } from "../types/auth.types";
 import { validateLogin } from "../utils/authValidation";
 import sharedStyles from "../styles/shared.module.css";
+import { debugUserProfile } from "../../../utils/debugUserProfile";
 
 interface LoginFormProps {}
 
@@ -40,14 +41,27 @@ export const LoginForm = ({}: LoginFormProps) => {
       if (signInError) throw signInError;
 
       // Fetch user role and approval status
+      console.log("🔍 Fetching user profile for ID:", data.user?.id);
       const { data: userData, error: userError } = await supabase
         .from("users")
         .select("role, approved")
         .eq("id", data.user?.id)
         .single();
 
-      if (userError || !userData) {
+      // More specific error handling
+      if (userError) {
+        console.error("User data fetch error:", userError);
+        if (userError.code === 'PGRST116') {
+          // No rows returned - user doesn't exist in users table
+          console.warn("⚠️ User profile not found - running debug check...");
+          await debugUserProfile(data.user?.id || "");
+          throw new Error("User profile not found. Please contact support.");
+        }
         throw new Error("Error retrieving user information");
+      }
+
+      if (!userData) {
+        throw new Error("User profile not found. Please contact support.");
       }
 
       // Redirect based on role

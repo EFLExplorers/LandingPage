@@ -26,13 +26,30 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
       if (session?.user) {
         // Fetch user role from database
-        const { data: userData } = await supabase
-          .from("users")
-          .select("role")
-          .eq("id", session.user.id)
-          .single();
+        try {
+          const { data: userData, error: userError } = await supabase
+            .from("users")
+            .select("role")
+            .eq("id", session.user.id)
+            .single();
 
-        setUserRole(userData?.role ?? null);
+          if (userError) {
+            console.error("User role fetch error:", userError);
+            if (userError.code === 'PGRST116') {
+              // No rows returned - user doesn't exist in users table
+              console.warn("User profile not found in users table for ID:", session.user.id);
+              setUserRole(null);
+            } else {
+              console.error("Error fetching user role:", userError);
+              setUserRole(null);
+            }
+          } else {
+            setUserRole(userData?.role ?? null);
+          }
+        } catch (error) {
+          console.error("Error in user role fetch:", error);
+          setUserRole(null);
+        }
       }
 
       setLoading(false);
@@ -47,13 +64,30 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setUser(session?.user ?? null);
 
       if (session?.user) {
-        const { data: userData } = await supabase
-          .from("users")
-          .select("role")
-          .eq("id", session.user.id)
-          .single();
+        try {
+          const { data: userData, error: userError } = await supabase
+            .from("users")
+            .select("role")
+            .eq("id", session.user.id)
+            .single();
 
-        setUserRole(userData?.role ?? null);
+          if (userError) {
+            console.error("User role fetch error:", userError);
+            if (userError.code === 'PGRST116') {
+              // No rows returned - user doesn't exist in users table
+              console.warn("User profile not found in users table for ID:", session.user.id);
+              setUserRole(null);
+            } else {
+              console.error("Error fetching user role:", userError);
+              setUserRole(null);
+            }
+          } else {
+            setUserRole(userData?.role ?? null);
+          }
+        } catch (error) {
+          console.error("Error in user role fetch:", error);
+          setUserRole(null);
+        }
       } else {
         setUserRole(null);
       }
