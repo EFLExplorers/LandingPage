@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Button } from "../ui/Button/Button";
 import { useRouter } from "next/router";
 import { debugUserProfile } from "../../utils/debugUserProfile";
+import { debugSupabaseConnection } from "../../utils/debugSupabaseConnection";
 
 interface LoginFormProps {
   platform: "student" | "teacher";
@@ -28,7 +29,12 @@ export const LoginForm = ({ platform }: LoginFormProps) => {
     setLoading(true);
 
     try {
+      // Debug Supabase connection first
+      console.log("🔍 Debugging Supabase connection before login...");
+      debugSupabaseConnection();
+
       // 1. Sign in attempt
+      console.log("🔐 Attempting to sign in...");
       const { data, error: signInError } =
         await supabase.auth.signInWithPassword({
           email,
