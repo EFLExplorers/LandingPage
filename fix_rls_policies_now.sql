@@ -1,5 +1,5 @@
--- Fix RLS Policies for User Registration
--- Run this in your Supabase SQL Editor to fix the registration issues
+-- Safe RLS Policy Setup for Users Table
+-- Run this in your Supabase SQL Editor
 
 -- First, let's see what policies currently exist
 SELECT schemaname, tablename, policyname, permissive, roles, cmd, qual, with_check
@@ -14,6 +14,7 @@ DROP POLICY IF EXISTS "Users can insert their own profile" ON users;
 DROP POLICY IF EXISTS "Users can view own profile" ON users;
 DROP POLICY IF EXISTS "Users can update own profile" ON users;
 DROP POLICY IF EXISTS "Admins can view all users" ON users;
+DROP POLICY IF EXISTS "Admins can update all users" ON users;
 
 -- Create the required policies for user registration and access
 
@@ -38,13 +39,22 @@ FOR SELECT USING (
   )
 );
 
--- Verify the policies were created
+-- Policy 5: Allow admins to update all users (optional)
+CREATE POLICY "Admins can update all users" ON users
+FOR UPDATE USING (
+  EXISTS (
+    SELECT 1 FROM users 
+    WHERE id = auth.uid() AND role = 'admin'
+  )
+);
+
+-- Verify RLS is enabled
+SELECT schemaname, tablename, rowsecurity 
+FROM pg_tables 
+WHERE tablename = 'users';
+
+-- List all policies for the users table
 SELECT schemaname, tablename, policyname, permissive, roles, cmd, qual, with_check
 FROM pg_policies 
 WHERE tablename = 'users'
-ORDER BY policyname;
-
--- Test that RLS is enabled
-SELECT schemaname, tablename, rowsecurity 
-FROM pg_tables 
-WHERE tablename = 'users'; 
+ORDER BY policyname; 
