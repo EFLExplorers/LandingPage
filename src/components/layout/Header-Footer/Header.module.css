@@ -5,9 +5,9 @@
   right: 0; 
   background-color: var(--theme-accent);
   z-index: 1000;
-  padding: 0.5rem var(--spacing-lg);
+  padding: 0.25rem var(--spacing-lg);
   border-bottom: 1px solid var(--theme-accent);
-  min-height: 4rem;
+  min-height: 3rem;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   box-sizing: border-box;
@@ -240,7 +240,7 @@
 /* Responsive Styles */
 @media (max-width: 850px) {
   .header {
-    padding: 0.5rem var(--spacing-md);
+    padding: 0.25rem var(--spacing-md);
   }
 
   .container {
@@ -369,7 +369,6 @@
   .mobileMenuButton {
     display: block !important;
     background-color: rgba(255, 255, 255, 0.1) !important;
-    border: 3px solid blue !important;
   }
 
   .nav {
