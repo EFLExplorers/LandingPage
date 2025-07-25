@@ -2,12 +2,12 @@
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
+  right: 0; 
   background-color: var(--theme-accent);
   z-index: 1000;
-  padding: var(--spacing-md) var(--spacing-lg);
+  padding: 0.25rem var(--spacing-lg);
   border-bottom: 1px solid var(--theme-accent);
-  min-height: var(--header-height);
+  height: 2.5rem;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   box-sizing: border-box;
@@ -109,9 +109,6 @@
   width: 40px;
   height: 40px;
   border-radius: 4px;
-  /* Debug styles */
-  border: 2px solid red !important;
-  background-color: rgba(255, 0, 0, 0.3) !important;
 }
 
 /* Group related styles */
@@ -240,10 +237,9 @@
 }
 
 /* Responsive Styles */
-@media (max-width: 600px) {
+@media (max-width: 850px) {
   .header {
-    padding: var(--spacing-sm) var(--spacing-md);
-    background-color: red !important; /* Debug: make header red on mobile */
+    padding: 0.25rem var(--spacing-md);
   }
 
   .container {
@@ -275,7 +271,6 @@
     opacity: 1 !important;
     width: 40px !important;
     height: 40px !important;
-    background-color: yellow !important; /* Debug: make button yellow on mobile */
   }
 
   .mobileMenu {

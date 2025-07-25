@@ -12,13 +12,11 @@ export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Debug: Log window width on component mount
+  // Check mobile/tablet viewport
   useEffect(() => {
     const checkMobile = () => {
-      const mobile = window.innerWidth <= 600;
+      const mobile = window.innerWidth <= 850;
       setIsMobile(mobile);
-      console.log('Header component mounted, window width:', window.innerWidth);
-      console.log('Is mobile view (< 600px):', mobile);
     };
     
     checkMobile();
@@ -39,7 +37,7 @@ export const Header = () => {
   // Close mobile menu when window is resized to desktop
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 600) {
+      if (window.innerWidth > 850) {
         setIsMobileMenuOpen(false);
       }
     };
@@ -63,37 +61,20 @@ export const Header = () => {
           onClick={toggleMobileMenu}
           aria-label="Toggle mobile menu"
           style={{
-            border: '3px solid red', 
-            backgroundColor: isMobileMenuOpen ? 'yellow' : 'rgba(255, 0, 0, 0.3)',
             display: isMobile ? 'block' : 'none',
             position: 'relative',
-            zIndex: 1002,
-            minWidth: '40px',
-            minHeight: '40px'
+            zIndex: 1002
           }}
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
         
-        {/* Debug button - always visible */}
-        <button 
-          onClick={toggleMobileMenu}
-          style={{
-            border: '3px solid green',
-            backgroundColor: 'green',
-            color: 'white',
-            padding: '8px',
-            marginLeft: '10px',
-            display: 'block'
-          }}
-        >
-          TEST MENU
-        </button>
+
       </div>
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className={styles.mobileMenu} onClick={closeMobileMenu} style={{border: '2px solid red'}}>
+        <div className={styles.mobileMenu} onClick={closeMobileMenu}>
           <nav className={styles.mobileNav} onClick={(e) => e.stopPropagation()}>
             <Link href="/platforms/teacher" className={styles.mobileNavLink} onClick={closeMobileMenu}>
               Teacher Platform
