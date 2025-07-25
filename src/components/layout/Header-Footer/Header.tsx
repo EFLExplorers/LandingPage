@@ -10,6 +10,21 @@ import styles from "./Header.module.css";
 
 export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Debug: Log window width on component mount
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = window.innerWidth <= 600;
+      setIsMobile(mobile);
+      console.log('Header component mounted, window width:', window.innerWidth);
+      console.log('Is mobile view (< 600px):', mobile);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const toggleMobileMenu = () => {
     console.log('Mobile menu toggle clicked, current state:', isMobileMenuOpen);
@@ -24,7 +39,7 @@ export const Header = () => {
   // Close mobile menu when window is resized to desktop
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 768) {
+      if (window.innerWidth > 600) {
         setIsMobileMenuOpen(false);
       }
     };
@@ -37,17 +52,42 @@ export const Header = () => {
     <header className={styles.header}>
       <div className={styles.container}>
         <Logo />
-        <Navbar />
-        <AuthButtons />
+        <div style={{ display: isMobile ? 'none' : 'flex' }}>
+          <Navbar />
+          <AuthButtons />
+        </div>
         
         {/* Mobile Menu Button */}
         <button 
           className={styles.mobileMenuButton}
           onClick={toggleMobileMenu}
           aria-label="Toggle mobile menu"
-          style={{border: '2px solid blue', backgroundColor: isMobileMenuOpen ? 'yellow' : 'transparent'}}
+          style={{
+            border: '3px solid red', 
+            backgroundColor: isMobileMenuOpen ? 'yellow' : 'rgba(255, 0, 0, 0.3)',
+            display: isMobile ? 'block' : 'none',
+            position: 'relative',
+            zIndex: 1002,
+            minWidth: '40px',
+            minHeight: '40px'
+          }}
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+        
+        {/* Debug button - always visible */}
+        <button 
+          onClick={toggleMobileMenu}
+          style={{
+            border: '3px solid green',
+            backgroundColor: 'green',
+            color: 'white',
+            padding: '8px',
+            marginLeft: '10px',
+            display: 'block'
+          }}
+        >
+          TEST MENU
         </button>
       </div>
 
