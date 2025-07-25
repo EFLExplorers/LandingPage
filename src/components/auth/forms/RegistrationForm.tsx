@@ -76,7 +76,15 @@ export const RegistrationForm = ({ platform }: RegistrationFormProps) => {
 
         if (profileError) {
           console.error("Profile creation error:", profileError);
-          throw new Error(`Failed to create user profile: ${profileError.message}`);
+          
+          // Handle specific profile creation errors
+          if (profileError.code === '42501') {
+            throw new Error("Registration failed due to security policy. Please contact support.");
+          } else if (profileError.code === '23505') {
+            throw new Error("An account with this email already exists. Please try logging in instead.");
+          } else {
+            throw new Error(`Failed to create user profile: ${profileError.message}`);
+          }
         }
 
         console.log("User profile created successfully for:", authData.user.id);
@@ -92,9 +100,28 @@ export const RegistrationForm = ({ platform }: RegistrationFormProps) => {
         }
       }
     } catch (error) {
-      setError(
-        error instanceof Error ? error.message : "An unexpected error occurred"
-      );
+      console.error("Registration error:", error);
+      
+      // Handle specific error types
+      if (error instanceof Error) {
+        const errorMessage = error.message;
+        
+        if (errorMessage.includes("429") || errorMessage.includes("Too Many Requests")) {
+          setError("Too many registration attempts. Please wait a few minutes before trying again.");
+        } else if (errorMessage.includes("42501") || errorMessage.includes("row-level security")) {
+          setError("Registration failed due to security policy. Please contact support.");
+        } else if (errorMessage.includes("duplicate key") || errorMessage.includes("already exists")) {
+          setError("An account with this email already exists. Please try logging in instead.");
+        } else if (errorMessage.includes("Invalid login credentials")) {
+          setError("Invalid email or password. Please check your credentials.");
+        } else if (errorMessage.includes("Email not confirmed")) {
+          setError("Please check your email and confirm your account before logging in.");
+        } else {
+          setError(`Registration failed: ${errorMessage}`);
+        }
+      } else {
+        setError("An unexpected error occurred during registration. Please try again.");
+      }
     } finally {
       setLoading(false);
     }
