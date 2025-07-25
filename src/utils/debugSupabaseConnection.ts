@@ -19,6 +19,16 @@ export const debugSupabaseConnection = () => {
       const url = new URL(supabaseUrl);
       console.log("✅ URL is valid:", url.hostname);
       
+      // Check for known URL patterns
+      if (supabaseUrl.includes("eflexplorers-ddvpckdfcfqwtjxdgvhb")) {
+        console.warn("⚠️ Using URL from env-template.txt - this may not be correct!");
+        console.log("💡 This URL appears to be from your template file");
+      } else if (supabaseUrl.includes("ldxprwemugqomkaroaqp")) {
+        console.log("✅ Using URL from vercel.json - this was working before");
+      } else if (supabaseUrl.includes("mamawoullxushoweknbw")) {
+        console.log("✅ Using URL from vercel.json - this was working before");
+      }
+      
       // Test DNS resolution
       console.log("🌐 Testing DNS resolution...");
       fetch(supabaseUrl + "/rest/v1/", {
@@ -38,6 +48,15 @@ export const debugSupabaseConnection = () => {
         console.log("  2. Verify your internet connection");
         console.log("  3. Check if Supabase service is down");
         console.log("  4. Verify the API key is correct");
+        
+        // Specific guidance for URL issues
+        if (error.message.includes("ERR_NAME_NOT_RESOLVED")) {
+          console.log("🚨 DNS Resolution Error - URL cannot be found!");
+          console.log("💡 Solutions:");
+          console.log("  - Check your Supabase dashboard for the correct URL");
+          console.log("  - Update your .env.local file with the correct URL");
+          console.log("  - Make sure you're using the right project");
+        }
       });
       
     } catch (error) {
@@ -64,6 +83,17 @@ export const debugSupabaseConnection = () => {
   
   if (supabaseUrl && supabaseUrl.includes("supabase.co")) {
     console.log("  ✅ Using Supabase cloud URL");
+  }
+  
+  // Check for URL mismatches
+  const knownUrls = [
+    "https://ldxprwemugqomkaroaqp.supabase.co",
+    "https://mamawoullxushoweknbw.supabase.co", 
+    "https://eflexplorers-ddvpckdfcfqwtjxdgvhb.supabase.co"
+  ];
+  
+  if (supabaseUrl && !knownUrls.includes(supabaseUrl)) {
+    console.warn("⚠️ Unknown Supabase URL - verify this is correct");
   }
   
   return {
