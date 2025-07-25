@@ -5,9 +5,9 @@
   right: 0; 
   background-color: var(--theme-accent);
   z-index: 1000;
-  padding: 0.25rem var(--spacing-lg);
+  padding: 0.5rem var(--spacing-lg);
   border-bottom: 1px solid var(--theme-accent);
-  height: 2.5rem;
+  min-height: 4rem;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   box-sizing: border-box;
@@ -21,11 +21,12 @@
 
 .logo {
   text-decoration: none;
-  padding: var(--spacing-sm) var(--spacing-md);
+  padding: 0.125rem var(--spacing-md);
   background-color: var(--theme-accent);
   border-radius: var(--radius-full);
   font-weight: 500;
   color: var(--text-inverse);
+  font-size: 0.875rem;
 }
 
 .nav {
@@ -53,10 +54,10 @@
 
 .registerButton,
 .loginButton {
-  padding: var(--button-padding-y) var(--button-padding-x);
+  padding: 0.25rem 0.75rem;
   border-radius: var(--radius-full);
   text-decoration: none;
-  font-size: var(--button-font-size);
+  font-size: 0.75rem;
   transition: var(--button-transition);
 }
 
@@ -239,7 +240,7 @@
 /* Responsive Styles */
 @media (max-width: 850px) {
   .header {
-    padding: 0.25rem var(--spacing-md);
+    padding: 0.5rem var(--spacing-md);
   }
 
   .container {
@@ -358,7 +359,7 @@
 
 @media (max-width: 480px) {
   .header {
-    padding: var(--spacing-xs) var(--spacing-sm);
+    padding: 0.5rem var(--spacing-sm);
   }
   
   .container {
@@ -393,6 +394,6 @@
 /* Landscape orientation fixes */
 @media (max-height: 500px) and (orientation: landscape) {
   .header {
-    padding: var(--spacing-xs) var(--spacing-md);
+    padding: 0.5rem var(--spacing-md);
   }
 }
