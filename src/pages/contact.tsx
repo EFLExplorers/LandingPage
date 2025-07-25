@@ -1,13 +1,18 @@
 import type { NextPage } from "next";
+import { useEffect } from "react";
 import Head from "next/head";
 import { PageLayout } from "../components/layout/PageLayout";
 import { ContactHeroSection } from "../components/layout/Contact/ContactHeroSection";
 import { ContactFormSection } from "../components/layout/Contact/ContactFormSection";
 import { ContactFAQSection } from "../components/layout/Contact/ContactFAQSection";
-
 import { ContactSection } from "../components/layout/Contact/ContactSection";
+import { scrollToTop } from "../utils/scrollToTop";
 
 export const ContactPage: NextPage = () => {
+  useEffect(() => {
+    scrollToTop();
+  }, []);
+
   return (
     <>
       <Head>

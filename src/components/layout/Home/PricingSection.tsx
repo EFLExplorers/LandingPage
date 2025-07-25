@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import styles from "./PricingSection.module.css";
 
 type PricingTier = {
@@ -8,6 +9,18 @@ type PricingTier = {
 };
 
 export const PricingSection = () => {
+  const router = useRouter();
+
+  const handleGetStarted = (tier: string) => {
+    if (tier === "Free Access" || tier === "Individual") {
+      router.push("/Auth/register/student");
+    } else if (tier === "Teacher") {
+      router.push("/Auth/register/teacher");
+    } else if (tier === "School") {
+      router.push("/contact");
+    }
+  };
+
   const pricingTiers: PricingTier[] = [
     {
       name: "Free Access",
@@ -55,7 +68,12 @@ export const PricingSection = () => {
               )}
             </div>
             <p className={styles.description}>{tier.description}</p>
-            <button className={styles.getStarted}>Get started</button>
+            <button 
+              className={styles.getStarted}
+              onClick={() => handleGetStarted(tier.name)}
+            >
+              Get started
+            </button>
           </div>
         ))}
       </div>

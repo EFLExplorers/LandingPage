@@ -11,7 +11,12 @@ export const TeacherHeroSection = () => {
           track student progress, and deliver engaging interactive lessons that make learning English 
           an exciting adventure for your students.
         </p>
-        <button className={styles.primaryButton}>Start Teaching</button>
+        <button 
+          className={styles.primaryButton}
+          onClick={() => window.location.href = '/Auth/register/teacher'}
+        >
+          Start Teaching
+        </button>
       </div>
       <div className={styles.heroImage}>
         <div className={styles.placeholder}>

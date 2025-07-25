@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./ContactSection.module.css";
-import { MdLocationOn, MdEmail, MdPhone, MdChevronRight } from "react-icons/md";
+import { MdChevronRight } from "react-icons/md";
 
 interface FAQ {
   question: string;
@@ -67,25 +67,8 @@ export const ContactSection = () => {
           <div className={styles.contactDetails}>
             <p className={styles.contactText}>
               Have questions about our English learning programs? We&apos;re
-              here to help! Reach out to us through any of the following
-              channels or fill out the contact form.
+              here to help! Fill out the contact form below and we&apos;ll get back to you as soon as possible.
             </p>
-            <div className={styles.contactInfo}>
-              <div className={styles.infoItem}>
-                <MdLocationOn className={styles.icon} />
-                <span>123 Learning Street, Education City, EC 12345</span>
-              </div>
-              <div className={styles.infoItem}>
-                <MdEmail className={styles.icon} />
-                <a href="mailto:contact@eslexplorers.com">
-                  contact@eslexplorers.com
-                </a>
-              </div>
-              <div className={styles.infoItem}>
-                <MdPhone className={styles.icon} />
-                <a href="tel:+1234567890">+1 (234) 567-890</a>
-              </div>
-            </div>
           </div>
 
           {/* Contact Form */}

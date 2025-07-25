@@ -5,7 +5,7 @@ export const HeroSection = () => {
   const router = useRouter();
 
   const handlePlatformSelect = (platform: "student" | "teacher") => {
-    router.push(`/register/${platform}`);
+    router.push(`/Auth/register/${platform}`);
   };
 
   return (

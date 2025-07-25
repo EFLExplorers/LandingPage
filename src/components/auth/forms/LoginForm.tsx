@@ -10,6 +10,7 @@ import sharedStyles from "../styles/shared.module.css";
 import { debugUserProfile } from "../../../utils/debugUserProfile";
 import { debugSupabaseConnection } from "../../../utils/debugSupabaseConnection";
 import { debugAuth } from "../../../utils/debugAuth";
+import { AUTH_PATHS, PLATFORM_PATHS, redirectToPlatform } from "../../../constants/paths";
 
 interface LoginFormProps {
   platform?: UserPlatform;
@@ -108,15 +109,11 @@ export const LoginForm = ({ platform }: LoginFormProps) => {
 
       // Redirect based on role
       if (userData.role === "teacher") {
-        if (!userData.approved) {
-          window.location.href = "/Auth/register/teacher/pending";
-        } else {
-          window.location.href = "/platforms/teacher";
-        }
+        redirectToPlatform.teacher(userData.approved);
       } else if (userData.role === "student") {
-        window.location.href = "/platforms/student";
+        redirectToPlatform.student();
       } else if (userData.role === "admin") {
-        window.location.href = "/admin/dashboard";
+        redirectToPlatform.admin();
       } else {
         window.location.href = "/";
       }
@@ -156,7 +153,7 @@ export const LoginForm = ({ platform }: LoginFormProps) => {
       />
 
       <div className={sharedStyles.forgotPassword}>
-        <Link href={`/Auth/forgot-password`} className={sharedStyles.link}>
+        <Link href={AUTH_PATHS.forgotPassword} className={sharedStyles.link}>
           Forgot your password?
         </Link>
       </div>
@@ -173,7 +170,7 @@ export const LoginForm = ({ platform }: LoginFormProps) => {
       </button>
 
       <div className={sharedStyles.links}>
-        <Link href="/Auth/register" className={sharedStyles.link}>
+        <Link href={AUTH_PATHS.register} className={sharedStyles.link}>
           Don&apos;t have an account? Register here
         </Link>
       </div>

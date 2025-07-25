@@ -379,6 +379,24 @@
     grid-template-columns: 1fr;
     gap: var(--spacing-md);
   }
+
+  .serviceCard {
+    padding: var(--spacing-xl);
+  }
+
+  .serviceTitle {
+    font-size: var(--font-xl);
+  }
+
+  .serviceDescription {
+    font-size: var(--font-base);
+    line-height: 1.6;
+  }
+
+  .backgroundIcon {
+    font-size: 4rem;
+    opacity: 0.03;
+  }
 }
 
 @media (max-width: 480px) {
@@ -397,5 +415,24 @@
 
   .serviceCard {
     padding: var(--spacing-lg);
+  }
+
+  .serviceTitle {
+    font-size: var(--font-lg);
+  }
+
+  .serviceDescription {
+    font-size: var(--font-sm);
+    line-height: 1.5;
+  }
+
+  .backgroundIcon {
+    font-size: 3rem;
+    opacity: 0.02;
+  }
+
+  .serviceIcon {
+    font-size: 2rem;
+    padding: var(--spacing-md);
   }
 }

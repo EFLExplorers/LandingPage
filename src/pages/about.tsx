@@ -1,8 +1,14 @@
 import type { NextPage } from "next";
+import { useEffect } from "react";
 import Head from "next/head";
 import { AboutUsSection } from "../components/layout/About/AboutUsSection";
+import { scrollToTop } from "../utils/scrollToTop";
 
 export const AboutPage: NextPage = () => {
+  useEffect(() => {
+    scrollToTop();
+  }, []);
+
   return (
     <>
       <Head>

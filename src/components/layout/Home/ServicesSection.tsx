@@ -66,7 +66,20 @@ export const ServicesSection = () => {
               <div className={styles.serviceIcon}>{service.icon}</div>
               <h3 className={styles.serviceTitle}>{service.title}</h3>
               <p className={styles.serviceDescription}>{service.description}</p>
-              <button className={styles.learnMore}>Learn More</button>
+              <button 
+                className={styles.learnMore}
+                onClick={() => {
+                  if (service.title === "Student Portal") {
+                    window.location.href = '/platforms/student';
+                  } else if (service.title === "Teacher Resources") {
+                    window.location.href = '/platforms/teacher';
+                  } else {
+                    window.location.href = '/contact';
+                  }
+                }}
+              >
+                Learn More
+              </button>
             </div>
           ))}
         </div>

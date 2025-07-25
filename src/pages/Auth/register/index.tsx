@@ -1,9 +1,15 @@
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import Link from "next/link";
 import styles from "@/styles/Auth.module.css";
+import { scrollToTop } from "../../../utils/scrollToTop";
 
 export const RegisterPage = () => {
   const router = useRouter();
+
+  useEffect(() => {
+    scrollToTop();
+  }, []);
 
   const handlePlatformSelect = (platform: "student" | "teacher") => {
     router.push(`/Auth/register/${platform}`);

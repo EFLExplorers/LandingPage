@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import styles from "./student.module.css";
+import { scrollToTop } from "../../utils/scrollToTop";
 
 const characters = [
   {
@@ -72,6 +73,11 @@ export default function StudentPlatform() {
     }
   }, [isSpinning]);
 
+  // Scroll to top on page load
+  useEffect(() => {
+    scrollToTop();
+  }, []);
+
   return (
     <main className={styles.main}>
       {/* Hero Section */}
@@ -83,7 +89,12 @@ export default function StudentPlatform() {
             English effectively. With interactive lessons, real-time feedback,
             and engaging activities, learning has never been more fun!
           </p>
-          <button className={styles.primaryButton}>Get Started</button>
+          <button 
+            className={styles.primaryButton}
+            onClick={() => window.location.href = '/Auth/register/student'}
+          >
+            Get Started
+          </button>
         </div>
         <div className={styles.heroImage}>
           <div className={styles.placeholder}></div>
@@ -185,7 +196,12 @@ export default function StudentPlatform() {
       <section className={styles.cta}>
         <div className={styles.ctaContent}>
           <h2>Register today to start your learning journey!</h2>
-          <button className={styles.registerButton}>Register</button>
+          <button 
+            className={styles.registerButton}
+            onClick={() => window.location.href = '/Auth/register/student'}
+          >
+            Register
+          </button>
         </div>
       </section>
     </main>

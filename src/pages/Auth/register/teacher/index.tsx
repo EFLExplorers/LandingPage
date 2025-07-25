@@ -1,7 +1,13 @@
+import { useEffect } from "react";
 import { AuthContainer } from "@/components/auth/layout";
 import { RegistrationForm } from "@/components/auth/forms";
+import { scrollToTop } from "../../../../utils/scrollToTop";
 
 export const TeacherRegistrationPage = () => {
+  useEffect(() => {
+    scrollToTop();
+  }, []);
+
   return (
     <AuthContainer
       title="Teacher Registration"

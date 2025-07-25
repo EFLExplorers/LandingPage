@@ -7,6 +7,7 @@ import { LoadingSpinner } from "../shared/LoadingSpinner";
 import { UserPlatform, AuthFormData } from "../types/auth.types";
 import { validateRegistration } from "../utils/authValidation";
 import sharedStyles from "../styles/shared.module.css";
+import { AUTH_PATHS, PLATFORM_PATHS, redirectToPlatform } from "../../../constants/paths";
 
 interface RegistrationFormProps {
   platform: UserPlatform;
@@ -95,11 +96,10 @@ export const RegistrationForm = ({ platform }: RegistrationFormProps) => {
         // Handle successful registration
         if (platform === "teacher") {
           // Redirect to pending approval page for teachers
-          window.location.href = "/Auth/register/teacher/pending";
+          redirectToPlatform.teacher(false);
         } else {
           // Auto-login for students and redirect to student platform
-          const platformUrl = process.env.NEXT_PUBLIC_STUDENT_URL;
-          window.location.href = `${platformUrl}/dashboard`;
+          window.location.href = `${PLATFORM_PATHS.student}/dashboard`;
         }
       }
     } catch (error) {
@@ -204,7 +204,7 @@ export const RegistrationForm = ({ platform }: RegistrationFormProps) => {
       </button>
 
       <div className={sharedStyles.links}>
-        <Link href="/Auth/login" className={sharedStyles.link}>
+        <Link href={AUTH_PATHS.login} className={sharedStyles.link}>
           Already have an account? Login here
         </Link>
       </div>
