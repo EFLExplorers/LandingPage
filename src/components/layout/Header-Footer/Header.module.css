@@ -104,6 +104,7 @@
   cursor: pointer;
   padding: var(--spacing-sm);
   color: var(--text-inverse);
+  z-index: 1001;
 }
 
 /* Group related styles */
@@ -123,6 +124,7 @@
   background-color: var(--theme-background);
   border-bottom: 1px solid var(--theme-accent);
   box-shadow: var(--shadow-lg);
+  z-index: 999;
 }
 
 .mobileNav {
@@ -135,7 +137,7 @@
   display: none;
   padding: var(--spacing-md) 0;
   text-decoration: none;
-  color: var(--text-inverse);
+  color: var(--text-primary);
   opacity: 0.8;
   font-size: 1rem;
   border-bottom: 1px solid var(--theme-accent);
@@ -192,6 +194,7 @@
   flex-direction: column;
   gap: var(--spacing-sm);
   margin-top: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-lg);
 }
 
 .mobileLoginButton {
@@ -241,18 +244,19 @@
   }
 
   .nav {
-    display: none;
+    display: none !important;
   }
 
   .authButtons {
-    display: none;
+    display: none !important;
   }
 
   .mobileMenuButton {
-    display: block;
+    display: block !important;
   }
 
   .mobileMenu {
+    display: block !important;
     position: absolute;
     top: 100%;
     left: 0;
@@ -264,12 +268,13 @@
   }
 
   .mobileNav {
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     padding: var(--spacing-md) var(--spacing-lg);
   }
 
   .mobileNavLink {
+    display: flex !important;
     padding: var(--spacing-md) 0;
     text-decoration: none;
     color: var(--text-primary);
@@ -280,7 +285,6 @@
     border: none;
     text-align: left;
     width: 100%;
-    display: flex;
     align-items: center;
     justify-content: space-between;
     transition: var(--transition-colors);
@@ -291,7 +295,7 @@
   }
 
   .mobileAuthButtons {
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     gap: var(--spacing-sm);
     margin-top: var(--spacing-sm);
@@ -299,6 +303,7 @@
   }
 
   .mobileLoginButton {
+    display: block !important;
     padding: var(--spacing-md) 0;
     text-align: center;
     background: none;
@@ -316,6 +321,7 @@
   }
 
   .mobileSignupButton {
+    display: block !important;
     padding: var(--spacing-md) 0;
     text-align: center;
     background-color: var(--theme-accent);

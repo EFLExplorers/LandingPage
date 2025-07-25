@@ -12,6 +12,7 @@ export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
+    console.log('Mobile menu toggle clicked, current state:', isMobileMenuOpen);
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
@@ -44,6 +45,7 @@ export const Header = () => {
           className={styles.mobileMenuButton}
           onClick={toggleMobileMenu}
           aria-label="Toggle mobile menu"
+          style={{border: '2px solid blue', backgroundColor: isMobileMenuOpen ? 'yellow' : 'transparent'}}
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -51,7 +53,7 @@ export const Header = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className={styles.mobileMenu} onClick={closeMobileMenu}>
+        <div className={styles.mobileMenu} onClick={closeMobileMenu} style={{border: '2px solid red'}}>
           <nav className={styles.mobileNav} onClick={(e) => e.stopPropagation()}>
             <Link href="/platforms/teacher" className={styles.mobileNavLink} onClick={closeMobileMenu}>
               Teacher Platform
