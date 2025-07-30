@@ -35,9 +35,9 @@ export const ContactPage: NextPage = () => {
       <PageLayout>
         <ContactHeroSection />
         <ContactFormSection />
-        <ContactFAQSection />
+         <ContactFAQSection />
     
-        <ContactSection />
+       {/* <ContactSection /> */}
       </PageLayout>
     </>
   );

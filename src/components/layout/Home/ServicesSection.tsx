@@ -49,7 +49,7 @@ export const ServicesSection = () => {
   return (
     <section className={styles.services}>
       <div className={styles.content}>
-        <h2 className={styles.title}>Our Services</h2>
+        <h1 className={styles.title}>Our Services</h1>
         <p className={styles.subtitle}>
           Discover how we make learning English an exciting journey for both
           students and teachers

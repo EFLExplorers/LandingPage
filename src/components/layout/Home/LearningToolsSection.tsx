@@ -43,7 +43,7 @@ export const LearningToolsSection = () => {
   return (
     <section className={styles.tools}>
       <div className={styles.content}>
-        <h2 className={styles.title}>Learning Tools</h2>
+        <h1 className={styles.title}>Learning Tools</h1>
         <p className={styles.subtitle}>
           Discover our comprehensive suite of tools designed to make learning
           English engaging and effective

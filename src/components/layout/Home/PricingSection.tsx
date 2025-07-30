@@ -54,7 +54,7 @@ export const PricingSection = () => {
 
   return (
     <section className={styles.pricing}>
-      <h2 className={styles.title}>Pricing</h2>
+      <h1 className={styles.title}>Pricing</h1>
       <p className={styles.subtitle}>Choose the plan that is right for you</p>
 
       <div className={styles.pricingGrid}>

@@ -1,7 +1,11 @@
 .tagline {
   width: 100%;
-  background-color: var(--theme-background);
-  padding: 5rem 0;
+  min-height: 400px;
+  background-color: var(--theme-background)  ;
+  padding: 12rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .content {
@@ -41,7 +45,8 @@
 
 @media (max-width: 768px) {
   .tagline {
-    padding: 4rem 0;
+    min-height: 300px;
+    padding: 6rem 0;
   }
 
   .content {
@@ -59,7 +64,8 @@
 
 @media (max-width: 480px) {
   .tagline {
-    padding: 3rem 0;
+    min-height: 250px;
+    padding: 4rem 0;
   }
 
   .title {

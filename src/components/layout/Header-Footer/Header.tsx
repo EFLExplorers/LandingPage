@@ -49,9 +49,18 @@ export const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        <Logo />
-        <div style={{ display: isMobile ? 'none' : 'flex' }}>
+        {/* Logo - Far Left */}
+        <div className={styles.logoSection}>
+          <Logo />
+        </div>
+        
+        {/* Navigation - Center */}
+        <div className={styles.navSection} style={{ display: isMobile ? 'none' : 'flex' }}>
           <Navbar />
+        </div>
+        
+        {/* Auth Buttons - Far Right */}
+        <div className={styles.authSection} style={{ display: isMobile ? 'none' : 'flex' }}>
           <AuthButtons />
         </div>
         
@@ -68,8 +77,6 @@ export const Header = () => {
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
-        
-
       </div>
 
       {/* Mobile Menu */}

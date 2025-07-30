@@ -38,7 +38,7 @@
 .content {
   width: 100%;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 8rem auto;
   padding: 0 2rem;
   position: relative;
   z-index: 1;
@@ -46,7 +46,7 @@
 }
 
 .title {
-  font-size: var(--font-4xl);
+  font-size: 3.5rem;
   font-weight: var(--font-bold);
   color: var(--text-primary);
   padding-bottom: var(--spacing-lg);
