@@ -45,8 +45,8 @@ export const redirectTo = (path: string) => {
 
 // Platform-specific redirect utilities
 export const redirectToPlatform = {
-  teacher: (approved: boolean = true) => {
-    if (approved) {
+  teacher: (status: 'approved' | 'pending' | 'rejected' | 'suspended' = 'approved') => {
+    if (status === 'approved') {
       redirectTo(PLATFORM_PATHS.teacher);
     } else {
       redirectTo(AUTH_PATHS.teacher.pending);

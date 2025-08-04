@@ -123,7 +123,7 @@ export const testSupabaseConnection = async () => {
     
     // Try a simple query
     const { data, error } = await supabase
-      .from('users')
+      .from('profiles')
       .select('count')
       .limit(1);
     

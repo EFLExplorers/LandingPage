@@ -39,7 +39,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     
     // Create user profile using service role (bypasses RLS)
     const { data, error } = await supabase
-      .from('users')
+      .from('profiles')
       .insert([
         {
           id: userId,
@@ -47,7 +47,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           first_name: firstName,
           last_name: lastName,
           role,
-          approved: role === 'student' ? true : false, // Students auto-approved
+          status: role === 'student' ? 'approved' : 'pending', // Students auto-approved
+          approved_at: role === 'student' ? new Date().toISOString() : null,
         },
       ])
       .select()

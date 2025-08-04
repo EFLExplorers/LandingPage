@@ -74,8 +74,8 @@ export const LoginForm = ({ platform }: LoginFormProps) => {
       // Fetch user role and approval status
       console.log("🔍 Fetching user profile for ID:", data.user.id);
       const { data: userData, error: userError } = await supabase
-        .from("users")
-        .select("role, approved")
+        .from("profiles")
+        .select("role, status")
         .eq("id", data.user.id)
         .single();
 
@@ -83,7 +83,7 @@ export const LoginForm = ({ platform }: LoginFormProps) => {
       if (userError) {
         console.error("User data fetch error:", userError);
         if (userError.code === 'PGRST116') {
-          // No rows returned - user doesn't exist in users table
+          // No rows returned - user doesn't exist in profiles table
           console.warn("⚠️ User profile not found - running debug check...");
           await debugUserProfile(data.user.id);
           setError("User profile not found. Please contact support.");
@@ -109,7 +109,7 @@ export const LoginForm = ({ platform }: LoginFormProps) => {
 
       // Redirect based on role
       if (userData.role === "teacher") {
-        redirectToPlatform.teacher(userData.approved);
+        redirectToPlatform.teacher(userData.status);
       } else if (userData.role === "student") {
         redirectToPlatform.student();
       } else if (userData.role === "admin") {

@@ -28,16 +28,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         // Fetch user role from database
         try {
           const { data: userData, error: userError } = await supabase
-            .from("users")
-            .select("role")
+            .from("profiles")
+            .select("role, status")
             .eq("id", session.user.id)
             .single();
 
           if (userError) {
             console.error("User role fetch error:", userError);
             if (userError.code === 'PGRST116') {
-              // No rows returned - user doesn't exist in users table
-              console.warn("User profile not found in users table for ID:", session.user.id);
+              // No rows returned - user doesn't exist in profiles table
+              console.warn("User profile not found in profiles table for ID:", session.user.id);
               setUserRole(null);
             } else {
               console.error("Error fetching user role:", userError);
@@ -66,16 +66,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       if (session?.user) {
         try {
           const { data: userData, error: userError } = await supabase
-            .from("users")
-            .select("role")
+            .from("profiles")
+            .select("role, status")
             .eq("id", session.user.id)
             .single();
 
           if (userError) {
             console.error("User role fetch error:", userError);
             if (userError.code === 'PGRST116') {
-              // No rows returned - user doesn't exist in users table
-              console.warn("User profile not found in users table for ID:", session.user.id);
+              // No rows returned - user doesn't exist in profiles table
+              console.warn("User profile not found in profiles table for ID:", session.user.id);
               setUserRole(null);
             } else {
               console.error("Error fetching user role:", userError);

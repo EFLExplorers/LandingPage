@@ -1,7 +1,7 @@
 import { supabase } from "../auth/supabaseClient";
 
 /**
- * Debug utility to check if a user exists in the users table
+ * Debug utility to check if a user exists in the profiles table
  * This helps identify if the issue is with missing user records
  */
 export const debugUserProfile = async (userId: string) => {
@@ -17,23 +17,23 @@ export const debugUserProfile = async (userId: string) => {
     
     console.log("✅ Auth user found:", authData.user?.email);
     
-    // Check if user exists in users table
+    // Check if user exists in profiles table
     const { data: userData, error: userError } = await supabase
-      .from("users")
+      .from("profiles")
       .select("*")
       .eq("id", userId)
       .single();
     
     if (userError) {
-      console.error("❌ Users table error:", userError);
+      console.error("❌ Profiles table error:", userError);
       if (userError.code === 'PGRST116') {
-        console.warn("⚠️ User not found in users table - this is likely the issue!");
-        return { exists: false, error: "User not found in users table" };
+              console.warn("⚠️ User not found in profiles table - this is likely the issue!");
+      return { exists: false, error: "User not found in profiles table" };
       }
       return { exists: false, error: userError.message };
     }
     
-    console.log("✅ User found in users table:", userData);
+    console.log("✅ User found in profiles table:", userData);
     return { exists: true, data: userData };
     
   } catch (error) {
@@ -43,7 +43,7 @@ export const debugUserProfile = async (userId: string) => {
 };
 
 /**
- * Check if the current user has a profile in the users table
+ * Check if the current user has a profile in the profiles table
  */
 export const checkCurrentUserProfile = async () => {
   const { data: { user } } = await supabase.auth.getUser();
