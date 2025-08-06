@@ -96,7 +96,7 @@ export const RegistrationForm = ({ platform }: RegistrationFormProps) => {
         // Handle successful registration
         if (platform === "teacher") {
           // Redirect to pending approval page for teachers
-          redirectToPlatform.teacher(false);
+          redirectToPlatform.teacher("pending");
         } else {
           // Auto-login for students and redirect to student platform
           window.location.href = `${PLATFORM_PATHS.student}/dashboard`;
